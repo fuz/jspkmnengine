@@ -1,0 +1,10 @@
+You will need the following libraries:
+
+Commons Codec
+http://commons.apache.org/codec/download_codec.cgi
+
+If you're using MySQL, you can use
+J/Connector
+http://dev.mysql.com/downloads/connector/j/
+
+Put them here, then change compile.bat

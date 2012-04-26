@@ -1,0 +1,4 @@
+grant { 
+	permission java.net.SocketPermission "127.0.0.1:8071", "connect";
+		permission java.net.SocketPermission "127.0.0.1:8071", "resolve";
+};
