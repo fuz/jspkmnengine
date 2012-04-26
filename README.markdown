@@ -1,6 +1,6 @@
 ## JS PKMN Engine
 
-This is a Javascript Pokemon Game Engine. You can see a video of its capabilities in videos/
+This is a Javascript Pokemon Game Engine. You can see a video of its capabilities in videos/ or [on YouTube][].
 
 ## Progress
  * old but modular code
@@ -42,4 +42,4 @@ This game was started when I was a kid in 2004/2005 and developed until 2007. In
  * Use AJAX with Node.js as a server, similar to how Pokemon Showdown approaches it. Back when this game was written, it didn't exist.
  * Perhaps integrate the battle engine of Pokemon Online or Pokemon Showdown. That way we'd have a more complete game engine.
 
-
+[on YouTube]:http://www.youtube.com/watch?v=vcwPOfVXRc0&feature=youtu.be
