@@ -1,26 +1,3 @@
-aCharacter = {
-	// our crash test dummy of sorts
-	Name:"Fuz",
-	Sprite:2,
-	Team:[],
-	Pokemons:[],
-	Items:[
-	 [13
-	 ]
-			   ],
-	// using the pocket IDs
-	ItemQuantity: [
-	 [1
-	 ]
-	],		  
-	Gender:1,
-	ActivePokemon:null,
-	Positioning: {
-		Facing:3,
-		XY:[4,4],
-		Tile:0 // what tile the player is on
-		}
-	}
 
 // raw pokemon object used to manipulate pokemon AND dump
 // condition - confusion etc
@@ -73,3 +50,29 @@ Pikachu = {
 }
 DefaultAttacks(Pikachu) ;
 DefaultAttacks(aPokemon) ;
+UpdateStats(Pikachu);
+UpdateStats(aPokemon);
+
+aCharacter = {
+	// our crash test dummy of sorts
+	Name:"Fuz",
+	Sprite:2,
+	Team:[0],
+	Pokemons:[Pikachu],
+	Items:[
+	 [13
+	 ]
+			   ],
+	// using the pocket IDs
+	ItemQuantity: [
+	 [1
+	 ]
+	],		  
+	Gender:1,
+	ActivePokemon:null,
+	Positioning: {
+		Facing:3,
+		XY:[4,4],
+		Tile:0 // what tile the player is on
+		}
+	}

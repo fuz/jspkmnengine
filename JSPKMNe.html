@@ -466,10 +466,12 @@ rob = new CHARACTER({
 		}
 	}) ; 
 fuz = new CHARACTER(aCharacter);
+fuz.Data.Pokemons = [];
+fuz.Data.Team = [];
 
 ActivateCharacter(fuz.Number) ;
-  rob.AddPokemon(aPokemon) ;
-  fuz.AddPokemon(Pikachu) ;
+  fuz.AddPokemon(aPokemon) ;
+  rob.AddPokemon(Pikachu) ;
  
  
  /*
@@ -497,6 +499,7 @@ code="jspkmne.server.JSPKEClient"
 <script src="gamemodes.js" language="javascript" type="text/javascript"></script>
 <script src="tileevents.js" language="javascript" type="text/javascript"></script>
 <script src="conversation.js" type="text/javascript"></script>
+<script src="exemplar_test.js" language="javascript" type="text/javascript"></script>
 <script src="tiles.js" type="text/javascript"></script>
 <script src="npcs.js" type="text/javascript"></script>
 <script src="maplib.js" type="text/javascript"></script>
@@ -512,7 +515,6 @@ code="jspkmne.server.JSPKEClient"
 <script src="keyboard.js" type="text/javascript"></script>
 <script src="pather.js" language="javascript" type="text/javascript"></script>
 
-<script src="exemplar_test.js" language="javascript" type="text/javascript"></script>
 
 <script src="devtools.js" language="javascript" type="text/javascript"></script>
 
@@ -534,30 +536,27 @@ if (CurrentTile) CurrentTile.DevLoadTile() ;
 document.body.style.display = "" ;
 
 var routine = [
- function() {
-	var i = SIDES[_right] ;
-	DefaultAttacks(i.Pokemon) ;
-	ActiveBattle.AddAttack(0, i.Pokemon, i.Enemy.Pokemon) ;
+ function(i) {
+  DefaultAttacks(i.Pokemon) ;
+  ActiveBattle.AddAttack(1, i.Pokemon, i.Enemy.Pokemon, i) ;
 },
- function() {
-var i = SIDES[_right] ;
-ActiveBattle.AddAttack(0, i.Pokemon, i.Enemy.Pokemon) ;
+ function(i) {
+ActiveBattle.AddAttack(2, i.Pokemon, i.Enemy.Pokemon, i) ;
  },
- function() {
-var i = SIDES[_right] ;
+ function(i) {
 DefaultAttacks(i.Pokemon) ;
-ActiveBattle.AddAttack(1, i.Pokemon, i.Enemy.Pokemon,i) ;
+ActiveBattle.AddAttack(3, i.Pokemon, i.Enemy.Pokemon, i) ;
  },
- function() {
-var i = SIDES[_right] ;
-ActiveBattle.AddAttack(1, i.Pokemon, i.Enemy.Pokemon,i) ;
+ function(i) {
+ActiveBattle.AddAttack(4, i.Pokemon, i.Enemy.Pokemon, i) ;
 }
 ];
 
 
 // cary out attacks
 function fakeai() {
- routine.shift()();
+ var i = (SIDES[_left].Character == ActiveCharacter ? SIDES[_right] : SIDES[_left]);
+ routine.shift()(i);
 }
 
 </script>

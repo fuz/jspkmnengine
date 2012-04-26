@@ -11,8 +11,8 @@ BEHAVIOURS = new Array() ; // all what is possible
 BEHAVIOURS[PRE_BATTLE] = StartBattle ;
 
 function StartBattle(Them) {
-	Them.AddPokemon(Pikachu) ;
-	this.AddPokemon(aPokemon) ;
+	// Them.AddPokemon(Pikachu) ;
+	// this.AddPokemon(aPokemon) ;
 	changeinterface(0) ;
 	ENGAGE(this.Number, Them.Number) ;
 }

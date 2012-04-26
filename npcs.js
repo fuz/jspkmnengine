@@ -4,12 +4,12 @@ npcs = [
 		{Name:"Timo",
 		Gender:1,
 		Sprite:1,
-		Team:[],
+		Team:[0],
 		Positioning:{
 			XY:[0,0],
 			Tile:0
 			},
-		Pokemons:[]
+		Pokemons:[aPokemon]
 		},{
 		Name:"Mentor",
 		Gender:1,
