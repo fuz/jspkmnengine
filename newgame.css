@@ -1,0 +1,51 @@
+#newgame {
+	height:187px;
+	background-image:url('graphics/newgamebg.PNG');
+	background-repeat:repeat-x;
+	border:thin ridge #0099FF;
+	border-bottom:none;
+}
+
+#gameslist tr {
+	background-image:url('images/bgs/grass.PNG');
+	padding:3px;
+}
+
+#gameslist {
+	width:260px;
+	border: thick double #0033FF;
+	border-top:none;
+	border-bottom:none;
+}
+
+#modelist {
+	overflow:auto;
+	width:260px;
+	height:150px;	
+	text-align:left;
+	font-family:Georgia, "Times New Roman", Times, serif;
+ 	position:relative; 
+	left:15%;
+	top:15%;
+	overflow:auto;
+}
+
+#gameslist h4 {
+	float:left;
+	margin:0px;
+	padding:0px;
+}
+
+#gameslist b {
+	float:right;
+	margin:0px;
+	padding:0px;
+	font-size:x-small;
+}
+
+#gameslist p {
+	clear:both;
+	font-size:x-small;
+	margin:0px;
+	padding:0px;
+}

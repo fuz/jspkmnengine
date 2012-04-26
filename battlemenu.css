@@ -1,0 +1,12 @@
+/* controls the appearance of the battle menu */
+
+.battlemenu {
+	width:100%;
+}
+
+.battlemenu td {
+	text-align: center;
+	width:25%;
+	padding:10px;
+	background-image:url(images/bgs/water.PNG);
+}

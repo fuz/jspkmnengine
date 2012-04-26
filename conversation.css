@@ -1,0 +1,49 @@
+/* conversation syling */
+
+#arrow {
+	float:right;
+}
+
+#continue {
+	float:right;
+}
+
+#textoutput {
+	height:auto;
+}
+
+#textoutput p{
+	margin:0;
+	padding:0;
+}
+
+#conversation {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	border: medium double #0066FF;
+	height:70px;
+	background-color: white;
+	padding:5px;
+	overflow:hidden;
+	text-align:left;
+	/*margin:auto;*/
+}
+
+#conversation p{
+	margin:0px;
+	padding:0px;
+}
+
+#conversation input {
+	/* border:thin; */
+}
+
+#conversation .worldview1{
+	float:left;
+	padding:5px;
+}
+
+#conversation .worldview2{
+	float:right;
+	padding:5px;
+}
+

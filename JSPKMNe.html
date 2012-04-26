@@ -1,0 +1,565 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="imagetoolbar" content="no">
+<meta http-equiv="imagetoolbar" content="false">
+<title>JSPKMNe</title>
+<link href="devtools.css" rel="stylesheet" type="text/css">
+
+<link href="mapb1_styles.css" rel="stylesheet" type="text/css">
+
+<link href="general.css" rel="stylesheet" type="text/css">
+<link href="titlescreen.css" rel="stylesheet" type="text/css">
+
+<link href="weather.css" rel="stylesheet" type="text/css">
+<link href="overlay.css" rel="stylesheet" type="text/css">
+
+<link href="attacklist.css" rel="stylesheet" type="text/css">
+
+<link href="battlemenu.css" rel="stylesheet" type="text/css">
+
+<link href="net_login.css" rel="stylesheet" type="text/css">
+<link href="loadgame.css" rel="stylesheet" type="text/css">
+<link href="newgame.css" rel="stylesheet" type="text/css">
+<link href="conversation.css" rel="stylesheet" type="text/css">
+
+<link href="pather.css" rel="stylesheet" type="text/css">
+
+<link href="health.css" rel="stylesheet" type="text/css">
+
+<link href="itemlist.css" rel="stylesheet" type="text/css">
+<link href="gamemenu.css" rel="stylesheet" type="text/css">
+
+<script src="nonjspke.js" language="javascript" type="text/javascript"></script>
+<script src="mapbuilder.js" language="javascript" type="text/javascript"></script>
+<script src="json.js" language="javascript" type="text/javascript"></script>
+<script src="screens.js" language="javascript" type="text/javascript"></script>
+
+<script src="pokeapi.js" language="javascript" type="text/javascript"></script>
+<script src="behaviours.js" language="javascript" type="text/javascript"></script>
+<script src="npcspeech.js" language="javascript" type="text/javascript"></script>
+
+<script src="nonactivated_character.js" language="javascript" type="text/javascript"></script>
+<script src="activated_character.js" language="javascript" type="text/javascript"></script>
+
+<script src="nonactivated_sprite.js" language="javascript" type="text/javascript"></script>
+<script src="activated_sprite.js" language="javascript" type="text/javascript"></script>
+
+<script src="nonactivated_netplayer_sprite.js" language="javascript" type="text/javascript"></script>
+
+<script src="pokemon_constants.js" language="javascript" type="text/javascript"></script>
+<script src="new_pokemondata.js" language="javascript" type="text/javascript"></script>
+<script src="globals.js" language="javascript" type="text/javascript"></script>
+<script src="constants.js" language="javascript" type="text/javascript"></script>
+<script src="jspke.js" language="javascript" type="text/javascript"></script>
+<script src="savegame.js" language="javascript" type="text/javascript"></script>
+
+<script src="invisible_battle.js" language="javascript" type="text/javascript"></script>
+<script src="graphical_battle.js" language="javascript" type="text/javascript"></script>
+
+<script src="ailments.js" language="javascript" type="text/javascript"></script>
+<script src="battle.js" language="javascript" type="text/javascript"></script>
+
+<script src="animations.js" language="javascript" type="text/javascript"></script>
+<script src="animator.js" language="javascript" type="text/javascript"></script>
+
+<script src="general.js" language="javascript" type="text/javascript"></script>
+<script src="pokelib.js" language="javascript" type="text/javascript"></script>
+<script src="sounds.js" language="javascript" type="text/javascript"></script>
+<script src="map_tools.js" language="javascript" type="text/javascript"></script>
+<script src="time.js" language="javascript" type="text/javascript"></script>
+<script src="actions.js" language="javascript" type="text/javascript"></script>
+
+<script src="itemsystem.js" language="javascript" type="text/javascript"></script>
+<script src="menusystem.js" language="javascript" type="text/javascript"></script>
+
+
+
+</head>
+
+<body><script>
+	document.body.style.display = "none" ;
+</script>
+<div id="devbar">
+<!-- handles all development features/functions -->
+<div id="interfacelist" style="clear:both;">
+ <a onclick="changeinterface(0);">0 - battle</a> |
+ <a onclick="changeinterface(1);">1 - map</a> |
+ <a onclick="changeinterface(2);">2 - titlescreen</a> |
+ <a onclick="changeinterface(3);">3 - newgame</a> |
+ <a onclick="changeinterface(4);">4 - login screen</a> |
+ <a onclick="changeinterface(5);">5 - load game</a> |
+ <a onclick="changeinterface(6);">6 - inventory</a> |
+ <a onclick="logout();">logout</a> |
+ <a onclick="connect('fuz','sam');">connect(1)</a> |
+ <a onclick="connect('fuz2','sam');">connect(2)</a> |
+ <a onclick="eval(document.form1.debug.value);">runcode</a>
+ <a onclick="fakeai();">fakeai</a> 
+</div>
+
+	<div id="debugger" style="clear:both;">
+	 <a onclick="EnableDevmode()">toggle devmode</a>
+	</div>
+<ul id="devmenu">
+ <li>Character Editor</li>
+ <li>Pokemon Editor</li>
+ <li>Map Editor</li>
+</ul>
+
+</div> <!-- devbar -->
+
+<div id="devblock">
+PLEASE WAIT ...
+<img src="graphics/aniball.gif">
+</div>
+
+<div id="game">
+<!-- Game container -->
+
+<div id="battleshell">
+<!-- Container for battles -->
+
+<!-- original height: 254
+width: 404 -->
+<table width="400" height="235" border="0" cellpadding="0" cellspacing="0" id="battle"> <!-- Table for battles -->
+  <tr> <!-- Teams -->
+  <!-- was 32 -->
+    <td height="24" colspan="3" id="team1" class="bench"><!-- Pokeballs go here --></td>
+	<td colspan="3" id="team2" class="bench"><!-- Pokeballs go here --></td>
+  </tr>
+  <tr>
+    <td width="39" height="33" id="mini1">
+		<!-- <img src="images/pixel.gif" name="mini1" id="imini1"> -->
+	</td>
+    <td width="118" id="health1">
+	
+	<!--
+	OLD HP
+	<div class="hpBack" id="hpBack">
+        <div class="flowOut" id="hp1" style="width:100px;height:20px;"></div>
+      </div> -->
+	 	</td>
+    <td width="45" id="level1">&nbsp;</td>
+    <td width="45" id="level2">&nbsp;</td>
+    <td width="118" id="health2">
+	<!--
+	OLD HP
+	<div class="hpBack">
+        <div class="flowOut" id="hp2" style="width:100px;height:20px;"></div>
+    </div> -->
+		</td>
+    <td width="39" id="mini2">
+		<!-- <img src="images/pixel.gif" name="mini2" id="imini2">-->
+	</td>
+  </tr>
+  <tr> <!-- height WAS 89 -->
+    <td height="90" colspan="3" class="pokemon" id="poke1">
+	<!-- <img src="images/pixel.gif" name="poke1" id="ipoke1"> -->
+	</td>
+    <td colspan="90" class="pokemon" id="poke2">
+	<!-- <img src="images/pixel.gif" name="poke2" class="pokemon" id="ipoke2"> -->
+	</td>
+  </tr>
+  <tr>
+    <td height="37" id="gender1" class="genders"></td>
+	<!-- Name for left -->
+    <td id="name1"></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+	<!-- Name for right -->
+    <td id="name2"></td>
+    <td id="gender2" class="genders"></td>
+  </tr>
+</table>
+</div>
+
+<div id="map">
+<!-- Map -->
+
+<div id="collider" style="top:0px;left:0px;">
+			<!-- Tile object selector
+			Gives menu of possible objects a group of map tiles can be
+			-->
+			[<a onclick="CancelTile()">x</a>]
+				Select Object: <form name="tileselector"><select name="tileobjects" id="tileobjects" onchange="ApplyTile(parseInt(this.value));this.selectedIndex=0;">
+				<option value="-1" selected></option>
+				</select></form>
+			</div> <!-- End of collider -->
+
+<div id="outertile">
+
+
+<!-- How the map is moved -->
+	<div id="tile" style="position:relative;background-position: 0 0;top:0px;left:0px;" onmouseover="zxcMseDown(event, this)" onmouseout="zxcMseUp();document.onmouseup = null;">
+		
+		<div id="selection" style="top:0px;left:0px;">
+		<!--
+		onmousedown="BeginTileFill();" onmouseup="EndTileFill();"
+		-->
+		</div>
+		
+		
+		<img name="tiler" style="position:absolute;left:0px;top:0px;" src="">
+						<!-- The actual tile IMAGE -->
+		<!-- Overlay causes LAG on firefox 
+		<div id="overlay" class="day"></div> -->
+		<div id="player" class="player"></div>
+	
+  </div> <!-- End of Tile -->
+ </div> <!-- End of Outertile -->
+</div> <!-- End of Map -->
+
+<div id="inventories">
+</div>
+<!--
+<div id="inventory">
+<div id="pockettitle">
+Recovery
+</div>
+<div id="bagimage">
+<img src="images/interface/general_bag.gif">
+</div>
+
+ <div id="description">
+Hello I am an item
+</div> 
+<div id="itemlist"><ul>
+<li>Full Heal</li>
+<li>Potion</li>
+</ul>
+</div>
+</div>
+-->
+
+<div id="gamemenu">
+<!--
+<table>
+<tr>
+<td><img src="images/sprites/items/rsitem068.png">
+<td>Pokemon</td>
+</tr>
+<tr>
+<td><img src="images/sprites/items/rsitem170.png">
+<td>Items</td>
+</tr>
+
+<tr>
+<td><img src="images/sprites/items/rsitem296.png">
+<td>Pokedex</td>
+</tr>
+
+<tr>
+<td><img src="images/sprites/trainers/icons/fuz6s.gif">
+<td>Me</td>
+</tr>
+
+<tr>
+<td><img src="images/sprites/items/rsitem209.png">
+<td>Save</td>
+</tr>
+
+<tr>
+<td><img src="images/sprites/items/rsitem168.png">
+<td>Cancel</td>
+</tr>
+
+</table>
+-->
+</div>
+
+
+<div id="titlescreen">
+<!-- Titlescreen container -->
+<div>
+  <div class="title"><h1>JavaScript Pokemon Engine</h1><img src="graphics/anilogo.gif" width="166" height="56">
+  </div>
+  <div id="middle">
+  </div>
+  <div>
+  <table width="100%" border="0" id="menu">
+  <tr>
+    <td>
+	<a onclick="changeinterface(3)">
+		<img src="images/icons/new_icon.gif" width="32" height="32" /><br />
+      New Game</a>
+	  </td>
+    <td><a onclick="changeinterface(5)">
+		<img src="images/icons/load_icon.gif" width="32" height="32" /><br />
+     Continue</a>
+      </td>
+    <td><a href="" onclick="return false;">
+		<img src="images/icons/tools_icon.gif" width="32" height="32" /><br />
+     Tools</a></td>
+    <td><a href="" onclick="return false;">
+	<img src="images/icons/options_icon.gif" width="32" height="32" /><br />
+      Options</a></td>
+  </tr>
+</table>
+</div>
+</div>
+</div>
+
+<div id="newgame">
+ <div id="modelist">
+  <table id="gameslist" cellspacing="0" cellpadding="0"></table>
+  </div>
+</div>
+
+<div id="loadgame">
+ <div id="saves">
+  <table id="savelist" cellspacing="0" cellpadding="0"></table>
+  </div>
+</div>
+
+
+<div id="loginscreen">
+<!-- Network Play login -->
+	<div class="title">
+		<h1>JavaScript Pokemon Engine - Online</h1>
+		<img src="graphics/anilogo.gif" width="166" height="56"/>
+		<!-- <span id="online">ONLINE</span> -->
+	  </div>
+<div id="netcenter">
+	<form id="credentials" onsubmit="return false">
+		<label for="username">Username</label>
+			<input value="test" type="text" id="username"/><br />
+		<label for="password">Password</label>
+			<input type="password" id="password"/><br/>
+		<input type="button" value="Login" id="login_button"
+		onclick="login(this)"/>
+	</form>
+</div>
+</div>
+
+<div id="conversation">
+<!-- lower box -->
+ <div id="textoutput">
+ <!-- where text actually appears -->
+</div>
+
+<div id="arrow">
+	<a onclick="PlayText();">more<img src="images/downarrow.PNG"></a>
+</div>
+
+<div id="continue">
+	<a onclick="DismissText();">continue<img src="images/downarrow.PNG"></a>
+</div>
+
+<div id="battlemenu">
+
+</div>
+
+<div id="attacklist">
+<!-- Attack list -->
+
+<!-- Old 
+<table width="100%"  border="0" cellpadding="5" cellspacing="5">
+
+
+        <tr>
+		  <td class="attackButton" id="attacks0"><div class="attack_name" id="attacktext0"></div>
+		  <div class="powerpoints"><span id="pp0"></span>/<span id="pp20"></span></div>
+		  </td>
+		  <td class="attackButton" id="attacks1"><div class="attack_name" id="attacktext1"></div>
+		  <div class="powerpoints"><span id="pp1"></span>/<span id="pp21"></span></div>
+		  </td>
+		  <td class="attackButton" id="attacks2"><div class="attack_name" id="attacktext2"></div>
+		  <div class="powerpoints"><span id="pp2"></span>/<span id="pp22"></span></div>
+		  </td>
+		  <td class="attackButton" id="attacks3"><div class="attack_name" id="attacktext3"></div>
+		  <div class="powerpoints"><span id="pp3"></span>/<span id="pp23"></span></div>
+		  </td>
+        </tr>
+</table>-->
+</div>
+
+<!-- General output -->
+</div>
+
+
+</div><!-- End of game container -->
+
+
+
+<div id="panel">
+<h1>Current Data</h1>
+  <form name="data">
+    <p>(x/y)<br>
+      Cursor Pixels:
+        <input name="cursorpx" type="text" id="cursorpx" size="7">
+      <input name="cursorpxcell" type="text" id="cursorpxcell" size="7">
+      <br>
+      (px/cells)<br>
+      Cursor Cell:
+      <input name="cursorcell" type="text" id="cursorcell" size="7">
+      <br>
+      
+      Player Location:
+      <input name="playerloc" type="text" id="playerloc" size="7">
+      <br>
+    <a href="javascript:CurrentTile.Data = CurrentTile.DevData;CurrentTile.Load();">Load Tile... </a></p>
+    <table width="146" height="195" border="0" cellpadding="0" cellspacing="0">
+  <tr align="center" valign="middle">
+    <td width="46" height="56">      <p align="center">
+        <a href="javascript:Pos(0);">NW<br></a>-1,-1
+    </p></td>
+    <td width="48">      <p align="center"><a href="javascript:Pos(1);">North</a><br>
+    0,-2</p></td>
+    <td width="52">      <p align="center"><a href="javascript:Pos(2);">NE</a><br>
+    -1,+1</p></td>
+  </tr>
+  <tr align="center" valign="middle">
+    <td>      <p align="center"><a href="javascript:Pos(3);">West</a><br>
+    -0,2</p></td>
+    <td><div align="center" class="style1">D</div></td>
+    <td>      <p align="center"><a href="javascript:Pos(4);">East</a><br>
+    2,0</p></td>
+  </tr>
+  <tr align="center" valign="middle">
+    <td>      <p align="center"><a href="javascript:Pos(5);">SW</a><br>
+    -1,+1</p></td>
+    <td>      <p align="center"><a href="javascript:Pos(6);">South</a><br>
+    0,2</p></td>
+    <td>      <p align="center"><a href="javascript:Pos(7);">SE</a><br>
+    +1,+1</p></td>
+  </tr>
+</table>
+
+
+<select name="acceleration" id="acceleration">
+  <option>1</option>
+  <option>2</option>
+  <option>3</option>
+  <option>4</option>
+  <option>5</option>
+  <option>6</option>
+  <option>10</option>
+  <option>12</option>
+  <option>13</option>
+  <option>14</option>
+  <option>100</option>
+  <option>200</option>
+</select>
+  <p>      <textarea name="map_text" cols="50" rows="50"></textarea>
+  </p>
+</form>
+</div>
+
+<div id="debug">
+<form name="form1" method="post" action="">
+  <textarea name="debug" cols="35" rows="10" id="debug">
+rob = new CHARACTER({
+	// our crash test dummy of sorts
+	Name:"Rob",
+	Sprite:0,
+	Team:[],
+	Pokemons:[],
+	Gender:1,
+	ActivePokemon:null,
+	Positioning: {
+		Facing:6,
+		XY:[10,3],
+		Tile:0 // what tile the player is on
+		}
+	}) ; 
+fuz = new CHARACTER(aCharacter);
+
+ActivateCharacter(fuz.Number) ;
+  rob.AddPokemon(aPokemon) ;
+  fuz.AddPokemon(Pikachu) ;
+ 
+ 
+ /*
+ Default attacks moved to exemplar test to prevent non-bug of attacklist not appearing
+ DefaultAttacks(aPokemon);
+ DefaultAttacks(Pikachu) */
+
+  ENGAGE(fuz.Number,rob.Number) ;
+  
+  INTERFACE.SetBack(0) ;
+</textarea>
+  <input type="button" name="Button" value="Debug" onclick="eval(document.form1.debug.value);">
+  <input type="button" name="off" value="Off" onclick="document.onkeydown=null">
+</form>
+</div>
+<span id="m0"></span>
+<span id="m1"></span>
+
+<applet name="JSPKEClient" id="JSPKEClient"
+code="jspkmne.server.JSPKEClient"
+	align="left" height="20" width="10"
+	codebase="/pkengine/server/" mayscript>
+</applet>
+
+<script src="gamemodes.js" language="javascript" type="text/javascript"></script>
+<script src="tileevents.js" language="javascript" type="text/javascript"></script>
+<script src="conversation.js" type="text/javascript"></script>
+<script src="tiles.js" type="text/javascript"></script>
+<script src="npcs.js" type="text/javascript"></script>
+<script src="maplib.js" type="text/javascript"></script>
+
+<script src="render.js" language="javascript" type="text/javascript"></script>
+<script src="interface.js" language="javascript" type="text/javascript"></script>
+
+<script src="netplay.js" type="text/javascript"></script>
+
+<script src="sprites.js" type="text/javascript"></script>
+
+<script src="gamelogic.js" type="text/javascript"></script>
+<script src="keyboard.js" type="text/javascript"></script>
+<script src="pather.js" language="javascript" type="text/javascript"></script>
+
+<script src="exemplar_test.js" language="javascript" type="text/javascript"></script>
+
+<script src="devtools.js" language="javascript" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+for (cur_interface = 0 ; cur_interface < interfaces.length ; cur_interface++) {
+ interfaces[cur_interface][0] = document.getElementById( interfaces[cur_interface][0] ) ;
+ hideI(cur_interface) ;
+}
+
+// Tester()
+init() ; // loads the game logic
+TileList() // fills available tile items
+
+// CurrentTile.DevData = [] ;
+
+// default dev data
+if (CurrentTile) CurrentTile.DevLoadTile() ;
+document.body.style.display = "" ;
+
+var routine = [
+ function() {
+	var i = SIDES[_right] ;
+	DefaultAttacks(i.Pokemon) ;
+	ActiveBattle.AddAttack(0, i.Pokemon, i.Enemy.Pokemon) ;
+},
+ function() {
+var i = SIDES[_right] ;
+ActiveBattle.AddAttack(0, i.Pokemon, i.Enemy.Pokemon) ;
+ },
+ function() {
+var i = SIDES[_right] ;
+DefaultAttacks(i.Pokemon) ;
+ActiveBattle.AddAttack(1, i.Pokemon, i.Enemy.Pokemon,i) ;
+ },
+ function() {
+var i = SIDES[_right] ;
+ActiveBattle.AddAttack(1, i.Pokemon, i.Enemy.Pokemon,i) ;
+}
+];
+
+
+// cary out attacks
+function fakeai() {
+ routine.shift()();
+}
+
+</script>
+</body>
+</html>

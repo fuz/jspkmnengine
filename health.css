@@ -1,0 +1,20 @@
+.emptyHP {
+	width:100px;
+	height: 11px;
+	background-image:url(graphics/hp_label.gif);
+	background-repeat:no-repeat;
+	overflow: hidden;
+}
+
+.HP {
+	position: relative;
+	overflow:hidden;
+	top: 4px;
+	left: 26px;
+	background-color: #00FF00;
+	height:3px;
+	width: 68px;
+	display: block;
+	margin-top: 0px;
+	/* color of health when present */
+}

@@ -1,0 +1,95 @@
+/*
+
+Tile size is 16 by 16
+
+*/
+
+#tile {
+	position:relative;
+	/* z-index:0; */
+	
+	background-repeat: no-repeat;
+	overflow: hidden;
+	background-color: #000000;
+	/* background-image: url(images/tiles/safari.png); */
+	background-position: 0px 0px;
+	/* background-attachment:fixed; */
+	width: 400px;  /*x 350 / 14 = 25 */
+	height: 247px; /* y 247 / 19 = 13 */
+}
+
+#outertile {
+	margin:auto;
+	position:relative;
+	overflow:hidden;
+	width:400px; /* x 350 / 14 = 25 */
+	height: 240px; /* y 247 / 19 = 13 */
+	background-color:black;
+}
+
+#battleshell td {
+	margin: auto;
+}
+
+#panel {
+	float: right;
+	text-align: right;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+#selection {
+	z-index:2;
+	position: relative;
+	/* width:14px;
+	height:19px; */
+	overflow:hidden;
+	border: 1px solid #FFFF00;
+}
+
+.player {
+	z-index:1;
+	width: 14px;
+	height: 21px;
+	position:absolute;
+	background-repeat:no-repeat;
+	background-position:-10% -20%;
+
+}
+
+#improfane {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-transform: uppercase;
+	color: #FF0000;
+	font-size: 36px;
+}
+
+#introduction {
+	text-align:center;
+	background-color: #000000;
+	width: 350px;
+	height: 247px;
+	vertical-align:middle;
+}
+
+#collider {
+	position: absolute;
+	z-index:3;
+	visibility: hidden;
+	height:19px;
+	border: medium ridge #0033FF;
+	background-color: #66CCFF;
+	font-size: xx-small;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#collider form {
+	margin-top:0;
+	margin-bottom:0;
+}
+
+.shader {
+	width:14px;
+	height:19px;
+	position: absolute;
+	border: 1px solid #000000;
+	overflow:hidden;
+}

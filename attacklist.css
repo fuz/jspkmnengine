@@ -1,0 +1,48 @@
+#attacklistA {
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	/* text-transform: uppercase; */
+	text-align: center;
+	font-size: 12px;
+	font-weight: bold;
+	font-variant: normal;
+	letter-spacing: 1px;
+	/* display:none; */
+	clear: both;
+	vertical-align: middle;
+}
+
+.PPcontainer {
+	float:right;
+}
+
+.curPP {
+	font-size: x-small;
+	text-align: right;
+}
+
+.maxPP {
+	font-size: x-small;
+	text-align: right;
+}
+
+#attacklist { /* container */
+	vertical-align: middle;
+	text-align:center;
+	width:100%;
+	clear: both;
+}
+
+
+.attacklist { /* table */
+	width:100%;
+	
+	/* display: none;  hidden to hide renderattack list tests */
+}
+
+.attacklist td {
+	/* width: 25%;  quarter for each attack */
+}	
+
+.attacklist tr h4{
+	margin: 0px;
+}

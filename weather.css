@@ -1,0 +1,31 @@
+.night {
+	background-image:url(dark_test/night.GIF);
+	opacity:0.3;
+	filter: alpha(opacity=30);
+}
+
+.afternoon {
+	background-image:url(dark_test/darkness.GIF);
+	opacity:0.3;
+	filter: alpha(opacity=30);
+}
+
+.day {
+	background-image:url(dark_test/brightness.gif);
+	opacity:0.1;
+	filter: alpha(opacity=10);
+}
+
+.dusk {
+	background-image:url(dark_test/dusk.gif);
+	opacity:0.25;
+	filter: alpha(opacity=25);
+}
+
+.clouds {
+	background-image:url(images/cloud3.gif);
+	opacity:0.5;
+	filter: alpha(opacity=50);
+}
+
+

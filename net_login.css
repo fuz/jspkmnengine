@@ -1,0 +1,47 @@
+#loginscreen input {
+	font-size:large;
+	font-family:Arial Black;
+	/* border: medium; */
+}
+
+#loginscreen {
+	width:400px;
+	text-align:center;
+}
+
+#online {
+	letter-spacing:5px;
+	font-size: large;
+}
+
+#netcenter {
+	height:155px;
+	clear: both;
+	background-image:url('graphics/login_screen.PNG') ;
+}
+
+#credentials {
+	position:relative;
+	top:7%;
+}
+
+#username {
+	background-image: url(images/bgs/water.PNG);
+}
+
+#password {
+	background-image: url(images/bgs/water.PNG);
+}
+
+#login_button {
+	margin-bottom: 0px;
+	background-image: url(images/bgs/grass2.PNG);
+}
+
+#loginscreen label {
+	display: block;
+	font-size:large;
+	font-weight: bold;
+	margin-bottom:0px;
+	font-variant: small-caps;
+}

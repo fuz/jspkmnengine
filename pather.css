@@ -1,0 +1,16 @@
+.explored {
+	background-color:#00CCFF;
+	position: absolute;
+	
+	opacity:0.3;
+	filter: alpha(opacity=30);
+}
+
+.path {
+	background-color:#993300;
+	position: absolute;
+	
+	opacity:0.3;
+	filter: alpha(opacity=30);
+}
+

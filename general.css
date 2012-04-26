@@ -1,0 +1,118 @@
+body {
+	cursor:default;
+}
+
+#game {
+	width:400px;
+	height:350px;
+	position:relative;
+	overflow:hidden;
+	float:left;
+}
+
+.bench {
+/* container for team */
+	height:24px;
+	text-align: center;
+}
+
+.team {
+/* individual team images */
+	height: 24px;
+	width: 24px;
+	position:relative;
+}
+
+.hpBack {
+	background-color:transparent;
+	width: 100px;
+	border: thin ridge #000000;
+	height: 20px;
+}
+
+#hp1 {
+	background-color: #00FF00;
+}
+
+#hp2 {
+	background-color: #00FF00;
+}
+
+.pokeNames {
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: bolder;
+	text-align: center;
+}
+
+.thrownpokeball {
+	position: relative;
+}
+
+#battle {
+	position: relative;
+}
+
+.pokemon {
+	background-position: 50% 85%;
+	background-repeat: no-repeat;
+	vertical-align:middle;
+	text-align: center;
+	/* vertical-align: middle; */
+}
+
+.pokemon img {
+	position:relative;
+}
+
+.attackButton {
+	background-color: #F8F0FF;
+	border: thin ridge #000000;
+}
+
+.attackButton:hover { /* prettiness for non-ie */
+	background-color:#66FF99;
+}
+
+.hide {
+	display: none;
+}
+
+.attack_name {
+	text-align: left;
+	clear: both;
+	float: left;
+}
+
+.powerpoints {
+	text-align: right;
+	float: none;
+	clear: both;
+	font-size: 9px;
+}
+#debug {
+	float: left;
+	/* clear: none; */
+}
+
+#battleshell {
+	margin:auto; /* Center the battleshell */
+}
+
+.genders {
+	text-align: center;
+}
+
+.genders img { 
+	height: 20px;
+	width: 16px;
+}
+
+#arrow {
+	position:relative;
+	clear:both;
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	font-variant: small-caps;
+	font-size: small;
+	text-align:right;
+}

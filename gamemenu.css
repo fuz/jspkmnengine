@@ -1,0 +1,50 @@
+/* handles the view of the ingame menu */
+
+#gamemenu {
+	position: absolute;
+	width:120px;
+	height:202px;
+	/*background-image: url(images/frames/main_menu.gif); */
+	padding-top:10px;
+	
+	/* opacity:0.9;
+	filter: alpha(opacity=90); */
+}
+
+.selectedMenu {
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.hiddenMenu {
+	z-index: -100;
+	right: -100;
+	bottom: -100;
+}
+
+.normalMenu {
+	text-decoration: none;
+	font-weight: normal;
+}
+
+.displayMenu {
+	z-index: 1000;
+	position: absolute;
+	right: 10px;
+	top: 15px;
+}
+
+#gamemenu table {
+	font-family: Arial;
+	font-variant: small-caps;
+	background-image: url(images/frames/main_menu.gif);
+	background-repeat: no-repeat;
+	text-align:center;
+	font-size: smaller;
+	margin:auto;
+	
+	width:120px;
+	height:202px;
+	border-collapse: collapse;
+}
+
