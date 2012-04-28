@@ -93,12 +93,11 @@ function gAttack(AttackNumber, From, Against, Side) {
 
 
 	if (newHP == 0) { // pokemon fainted
-		this.Faint(Side, Against) ;
-		return ;
+		this.AddQueue( this.Faint, [Side, Against]);
 	}
 	this.AddQueue( this.RunStatus, [From, Side] ) ;
+	this.AddQueue( this.RunTurn, [] ) ;
 	Put([From.Name,"uses",attacks[AttackID][0] ],[RunQueue,this]) ;
-	this.AddQueue( this.RunTurn,[] ) ;
 	
 }
 

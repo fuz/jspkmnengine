@@ -9,8 +9,11 @@ function NPCCharacter() {
 	this.SetBehaviour = SetBehaviour ;
 }
 
+// set this NPC's next behaviour
 function SetBehaviour(Parameters) {
-	this.Queued.push( [BEHAVIOURS[this.Data.Behaviour] , [Parameters] ] ) ;
+	var nextBehaviour = this.Data.Behaviours[0];
+	var action = nextBehaviour[0];
+	this.Queued.push( [BEHAVIOURS[action] , [Parameters] ] ) ;
 }
 
 function nAction() {
@@ -19,23 +22,30 @@ function nAction() {
 				this.Data.Positioning.Facing
 				) ;
 	Infront = GetObjectAt(Infront) ;
+	var tc = GetTileContents(Infront);
 	
-	if ( isPlayer(Infront) ) {
+	if ( tc.hasCharacter() ) {
 	 var Them = character_pool[ Infront[0] ] ;
 	 this.Talk( Them ) ;
-	} else if ( hasTileItem(Infront) ) {
-	 this.Interact( GetTileItemNumber(Infront), Infront ) ;
+	} else if ( tc.hasTileItem() ) {
+	 this.Interact( GetTileItemNumber(tc.TileItem), Infront ) ;
 	}
 }
 
 function nTalk(Their) {
-	var nextBehaviour = this.Data.Behaviour ;
-	
-	this.SetBehaviour( Their ) ;
-	
-	if ( nextBehaviour >= 0 ) {
-		this.Say( nextBehaviour ) ;
+	var mode = "random";
+	var nextSpeech = 0; // default first speech item
+
+	if (this.Data.Behaviours.length > 0) {
+		var nextBehaviour = this.Data.Behaviours[0] ;
+		mode = nextBehaviour[0];
+		this.SetBehaviour( Their ) ;
+
+		nextSpeech = (nextBehaviour.length > 1 ? nextBehaviour[1] : 0)
 	}
+
+		
+	this.Say( nextSpeech, mode ) ;
 	// npc needs to be able to do something else other than battle
 	
 	INTERFACE.SetEncounterImage(_right, TrainerImage(this.Data.Sprite) ) ;

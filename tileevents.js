@@ -12,7 +12,7 @@ TileEvents[1] = function(){
 
 TileEvents[4] = function(t){
 	this.Action={
-		Description: ["It's a",t[0]]
+		Description: ["It's a",t.Name,"."]
 			},
 	this.Ontop={
 		Description: "Hmm, this is a comfortable chair! Better not get distracted though."

@@ -73,15 +73,18 @@ function CharacterAction(CharacterNumber) {
 
 	// var Me = character_pool[CharacterNumber] ;
 	Me = this ;
+	var InfrontObject;
 	var Infront = GetXYinFront(
 				Me.Data.Positioning.XY,
 				Me.Data.Positioning.Facing
 				) ;
+
 	Infront = GetObjectAt(Infront) ;
+	var tc = GetTileContents(Infront);
 	
-	if (isPlayer(Infront)) {
+	if (tc.hasPlayer()) {
 		
-		var Their = character_pool[ Infront[0]] ;
+		var Their = character_pool[ tc.Character ] ;
 		EnableText() ;
 		INTERFACE.SetEncounterImage(_left, TrainerImage(Their.Data.Sprite) ) ;
 		
@@ -93,8 +96,8 @@ function CharacterAction(CharacterNumber) {
 		}
 	
 	else {
-		if (Infront > 0 && TileEvents[Infront]) {
-			InfrontObject = GetTileObject(Infront) ;
+		if (tc.hasTileItem() && TileEvents[tc.TileItem]) {
+			InfrontObject = GetTileObject(tc.TileItem) ;
 		}
 		else return ;
 	}
@@ -102,10 +105,10 @@ function CharacterAction(CharacterNumber) {
 	if ( CharacterNumber == STATE.ActiveCharacter ) {
 	
 
-			var TileEvent = new TileEvents[Infront](InfrontObject) ;
+			var TileEvent = new TileEvents[tc.TileItem](InfrontObject) ;
 			// create an instance of the tile infront
 			
-			InvokeTile(TileEvent, CharacterNumber, Infront) ;
+			InvokeTile(TileEvent, CharacterNumber, tc.TileItem) ;
 			delete TileEvent ;
 		}
 }
@@ -120,7 +123,7 @@ function InvokeTile(TileInstance, Me, TileNumber) {
 	if (ThisTile.Description) {
 		INTERFACE.ClearEncounterImage() ;
 		EnableText() ;
-		Put( ThisTile.Description ) ;
+		Put( ThisTile.Description, [DisableText, this]) ;
 	}
 }
 
@@ -134,7 +137,7 @@ function OnTile(TileInstance, CharacterNumber, TileNumber) {
 	if (ThisTile.Description) {
 		INTERFACE.ClearEncounterImage() ;
 		ShowText() ;
-		Put( [ ThisTile.Description ] ) ;
+		Put( [ ThisTile.Description ], [DisableText, this] ) ;
 	}
 	else if (ThisTile.Battle) {
 		ThisTile.Battle[0].apply( character_pool[CharacterNumber], ThisTile.Battle[1] ) ;	

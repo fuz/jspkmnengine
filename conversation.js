@@ -12,9 +12,15 @@
 STATEMENTS = 0 ;
 REPLY = 1 ;
 
-function CharacterSpeech(SpeechNumber) {
+function CharacterSpeech(SpeechNumber, Behaviour) {
 	EnableText() ;
-	Put( [ speech[this.NPCNumber][STATEMENTS][SpeechNumber] ],[RunQueue, this] ) ;
+	var speechlist = Behaviour || "random";
+	console.log("Speech Number:", SpeechNumber, "Speech Mode: ", Behaviour);
+	var myspeech = speech[this.NPCNumber];
+	var mode = myspeech[speechlist];
+	console.log("Speech...");
+			   
+	Put( [ mode[SpeechNumber] ],[RunQueue, this] ) ;
 }
 
 function Put(Data, Do) {

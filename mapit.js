@@ -244,7 +244,7 @@ function MovePlayer(Code) { //Cur = CurPos( this.What.style ) ;
 		this.XY = XY ;
 	}
 	
-	// PlayerLocation.value = this.XY ;
+	PlayerLocation.value = CellToXYNumber(this.XY) ;
 }
 
 function XYtoCellNumber(XY) {

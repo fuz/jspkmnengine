@@ -76,7 +76,7 @@ function Tile( N ) {
 	// [Loc, Offset, XY]
 	// filename, global offset, size, playerpos
 	this.Number = N ;
-	this.Loc = Tiles[N][0] // URL of tile
+	this.Loc = Tiles[N][0]; // URL of tile
 	this.Offset = Tiles[N][1] ; // pixels
 	this.XY = Tiles[N][2] ;
 
@@ -153,25 +153,32 @@ function Sprite(SpriteNumber, PageObject, Positioning, CharacterNumber, PlayerIm
 function CreateSight(Range) {
 	var WatchedList = [] ; // list of tiles currently watched by character
 	var NextXY = this.Character.XY ;
-	
+
 	for (var current_square = 0 ; current_square < Range ; current_square++) {
-	 var NextXY = [
-		NextXY[_x] + Positions[this.Character.Facing] [_x],
-		NextXY[_y] + Positions[this.Character.Facing] [_y]
+		var NextXY = [
+		       NextXY[_x] + Positions[this.Character.Facing] [_x],
+		       NextXY[_y] + Positions[this.Character.Facing] [_y]
 				] ;
-	 
-	 var ThisCell = XYtoCellNumber(NextXY) ;
-	 WatchedList.push(ThisCell) ;
-	 if ( CurrentTile.Data[ThisCell] && CurrentTile.Data[ThisCell].length ) {
-		 // player exists here, ie, they've been seen
-		 CurrentTile.Data[ThisCell][2] = this.CharacterNumber ;
-	 }  else if ( typeof CurrentTile.Data[ThisCell] == "number" ) {
-		 // a tile item exists here
-		 CurrentTile.Data[ThisCell] = [,CurrentTile.Data[ThisCell],this.CharacterNumber] ;
-	 } else {
-		// the player's LoS is the only thing here
-		CurrentTile.Data[ThisCell] = [,,this.CharacterNumber] ; 
-	 }
+		
+		var ThisCell = XYtoCellNumber(NextXY) ;
+		WatchedList.push(ThisCell) ;
+		var tc = GetTileContents(CurrentTile.Data[ThisCell]);
+		tc.TileItem = 10;
+		tc.LoS = this.CharacterNumber;
+		CurrentTile.Data[ThisCell] = ToRawContents(tc);	
+
+		/*
+		if ( CurrentTile.Data[ThisCell] && CurrentTile.Data[ThisCell].length ) {
+			// player exists here, ie, they've been seen
+			CurrentTile.Data[ThisCell][2] = this.CharacterNumber ;
+		}  else if ( typeof CurrentTile.Data[ThisCell] == "number" ) {
+			// a tile item exists here
+			CurrentTile.Data[ThisCell] = [,CurrentTile.Data[ThisCell],this.CharacterNumber] ;
+		} else {
+		       // the player's LoS is the only thing here
+		       CurrentTile.Data[ThisCell] = [,,this.CharacterNumber] ; 
+		}
+		*/
 	}
 	this.WatchedList = WatchedList ;
 }
@@ -181,6 +188,12 @@ function ClearSight() {
 	// stops the character from responding to line of sight
 	for (var current_cell = 0 ; current_cell < this.WatchedList.length ; current_cell++) {
 		ThisCell = this.WatchedList[current_cell] ;
+
+		var tc = GetTileContents(CurrentTile.Data[ThisCell]);
+		tc.TileItem = undefined;
+		tc.LoS = undefined;
+		CurrentTile.Data[ThisCell] = ToRawContents(tc);
+		/*
 		CurrentTile.Data[ThisCell].length = 2 ; // remove the character from the tile
 		
 		// alert(CurrentTile.Data[ThisCell]) ;
@@ -190,6 +203,8 @@ function ClearSight() {
 			CurrentTile.Data[ThisCell] = undefined ;
 		}
 		// alert(CurrentTile.Data[ThisCell]) ;
+		*/
+		
 	}
 }
 
@@ -280,7 +295,7 @@ function RenderSprite() {
 
 if (!this.RenderCheck() ) return false ; // not on the same tile
 	ClearCharacter(this.Character.XY) ;
-	SetCharacterAt(this.CharacterNumber, this.Character.XY) ;
+	var tc = SetCharacterAt(this.CharacterNumber, this.Character.XY) ;
 
 	RPos = ApplyOffset( CellToPixel(this.Character.XY) ) ;
 
@@ -492,7 +507,8 @@ function LoadNPCS() {
 	var behaviourList = TileNpcs[STATE.CurrentTile][cur_npc][4] ;
 	
 	if ( behaviourList && behaviourList.length ) {
-		NPC.Data.Behaviour = TileNpcs[STATE.CurrentTile][cur_npc][4][0] ;
+		// make a copy of all behaviours
+		NPC.Data.Behaviours = TileNpcs[STATE.CurrentTile][cur_npc][4].slice(0) ;
 	}
 
 	NPC.NPCNumber = TileNpcs[STATE.CurrentTile][cur_npc][2] ;
@@ -556,10 +572,13 @@ function pxGetFinalPosition(Code, CurpxXY) {
 
 function GetObjectAt(XY) {
 	var cell = XYtoCellNumber(XY)
-	 return CurrentTile.Data[ cell  ] ;
+	return CurrentTile.Data[ cell  ] ;
 }
 
 function GetTileObject(TileItemNumber) {
+	if (typeof TileItemNumber === "object" && TileItemNumber.constructor == TileContents) {
+		throw "You passed in TileContents, not the TileContents.Number";
+	}
 	return TileItems[ TileItemNumber ] ;
 }
 
@@ -572,6 +591,7 @@ function isPlayer(TileData) {
 	}
 }
 
+/*
 function GetTileItemNumber(TileData) {
 	TileNumber = false ;
 	
@@ -581,6 +601,11 @@ function GetTileItemNumber(TileData) {
 	 TileNumber = TileData[1] ;
 	}
 	return TileNumber ;
+} */
+
+function GetTileItemNumber(TileData) {
+	var tc = GetTileContents(TileData);
+	return tc.TileItem;
 }
 
 function hasTileItem(TileData) {
@@ -593,6 +618,15 @@ function hasTileItem(TileData) {
 function SetCharacterAt(CharacterNumber, XY) {
 	var cell = XYtoCellNumber(XY) ;
 	var TileUnderneath = CurrentTile.Data[cell] ; // anything already here
+	var tc = GetTileContents(TileUnderneath);
+	tc.Character = CharacterNumber;
+
+	// update tile
+	CurrentTile.Data[ cell ] = ToRawContents(tc);	
+
+	return tc;
+
+	// todo: remove below
 
 	if ( typeof TileUnderneath == "number" ) { // a tile item exists underneath the player
 	 // the player is now ontop of this tile
@@ -643,35 +677,42 @@ function ClearCharacter(XY) {
 }
 
 function GetTileUnderPlayer(TileObject) {
+	return TileObject.TileItem;
+	/*
 	if (TileObject && TileObject.length > 1) {
 		return TileObject[1] ;
 	}
+	*/
 }
 
 function isSolidTile(TileData) {
+	return (TileData && TileData.solid);
+	/*
 	if (TileData && TileData[_solidity]) {
 		return true ;
 	}
 		return false ;
+	*/
 }
 
 function CheckSolidity(XY, Facing, oldXY) {
 	var Solidity = false ; // default: non solid
+
 	var Destination = GetObjectAt( XY ) ;
+	var tc = GetTileContents( Destination ) ;	
 	
-	if ( isPlayer(Destination) ) {
-	 Solidity = true ; // players take precedence and make any tile solid
-	} else {
-		var TileAhead = GetTileObject(Destination) ;
-		var oldTile = GetTileObject(
-						GetTileUnderPlayer(
-						GetObjectAt( oldXY )
-										)
-					  ) ;
-	 	
-		if ( isSolidTile(TileAhead) ) {
-			 Solidity = TileAhead[_solidity] ;
-		} else if ( CheckEdges(Facing, oldTile, TileAhead) ) {
+	if ( tc.hasCharacter() ) {
+		Solidity = true ; // players take precedence and make any tile solid
+	} else if (tc.hasTileItem()) {
+
+		var TileAhead = GetTileObject(tc.TileItem) ;
+		var old = GetTileContents(GetObjectAt( oldXY ));
+		var oldTile = GetTileObject(old.TileItem);
+
+		if ( TileAhead.solid ) {
+			 console.log("cannot move, solid " + TileAhead.name);
+			 Solidity = TileAhead.solid ;
+		} else if (old.hasTileItem() && CheckEdges(Facing, oldTile, TileAhead) ) {
 		// check if edge of tile item is solid
 			 Solidity = true ;
 		}
@@ -680,10 +721,13 @@ function CheckSolidity(XY, Facing, oldXY) {
 }
 
 function isDirectionallySolid(Tile) {
+	return Tile.dsolid;	
+	/*
 	if (Tile && Tile.length && Tile[3]) {
 		return true ;
 	}
 		return false ;
+	*/
 }
 
 function GetXYinFront(XY, Direction) {
@@ -704,11 +748,11 @@ function CheckEdges(Facing, oldTile, newTile) {
 	if (newTile == oldTile) { // if they're the same then the edges are not solid
 		return false ;
 	}
-	if ( isDirectionallySolid(newTile) && Facing == newTile[3]) { // the new tile has a solid edge
+	if ( isDirectionallySolid(newTile) && Facing == dsolid) { // the new tile has a solid edge
 		return true ;
 	}
-		// alert("checking existing tile\n"+Positions[Facing][_opposite] + "\n" + oldTile) ;
-	if (isDirectionallySolid(oldTile) && Positions[Facing][_opposite] == oldTile[3] ) { // the current tile has a solid edge
+	// alert("checking existing tile\n"+Positions[Facing][_opposite] + "\n" + oldTile) ;
+	if (oldTile.hasTileItem() && isDirectionallySolid(oldTile) && Positions[Facing][_opposite] == oldTile.dsolid ) { // the current tile has a solid edge
 		return true ;
 	}
 			
@@ -735,10 +779,19 @@ function areXYequal(XYa,XYb) {
 
 function isSolidAt(XY) {
 	var Destination = GetObjectAt(XY) ;
-	if ( isSolidTile(GetTileObject(Destination)) || isPlayer(Destination) ) {
-	 return true ;
+
+	var tc = GetTileContents(Destination);
+	console.log(tc);
+	if (tc.hasCharacter()) {
+		return true;
 	}
-	return false ;
+	var item = GetTileObject(tc.TileItem);
+	console.log(item);
+	if (item && item.solid) {
+		console.log("solid here");
+		return true;
+	}
+	return false;
 }
 
 function TryMovePlayer(Direction) {
@@ -936,10 +989,14 @@ function MovedPlayer(pxXY, XY) {
 	// the player has now moved from one space to another
 	this.Move(pxXY) ;
 	this.Character.XY = XY ;
-	// PlayerLocation.value = this.Character.XY ;
+	PlayerLocation.value = XYtoCellNumber(this.Character.XY) ;
 	
 	var TileData = SetCharacterAt(this.CharacterNumber, XY) ;
-
+	if (TileData.hasTileItem()) {
+		ThisTile = TileData.TileItem;
+		Metadata = TileData.LoS;
+	
+	/*
 	if ( TileData ) {
 	var ThisTile = TileData[0] ;
 	
@@ -948,10 +1005,11 @@ function MovedPlayer(pxXY, XY) {
 	if (TileData[1]) {
 		var Metadata = TileData[1] ;	
 	}
+	*/
+	
 	var TileEvent = new TileEvents[ThisTile]( TileItems[ThisTile], Metadata ) ;
 		OnTile(TileEvent, this.CharacterNumber, ThisTile) ;
 		
-		// Code = 0 ; // this fixes the problem but still needs a proper solution, one that blocks until the event is over
 	}
 }
 
@@ -1073,7 +1131,7 @@ function TileList() {
 	ListBox = document.forms["tileselector"].tileobjects ;
 	List = ListBox.options ;
 	for ( CurrentItem = 0 ; CurrentItem < TileItems.length ; CurrentItem++) {
-		List[List.length] = new Option(TileItems[CurrentItem][0],CurrentItem) ;
+		List[List.length] = new Option(TileItems[CurrentItem].name,CurrentItem) ;
 	}
 }
 
@@ -1105,7 +1163,7 @@ function ShadeTile(TileObjectNumber, pxXY) {
 	Shaded = document.createElement("div") ;
 	Shaded = [Shaded, Shaded.style] ;
 	// Text = document.createTextNode(TileObject[0].charAt(0)) ;
-	Current =  CellToPixel( TileObject[1] ) ;
+	Current =  CellToPixel( TileObject.xy ) ;
 	
 	Shaded[_style].width = Current[_x] + Px ;
 	Shaded[_style].height = Current[_y] +  Px ;
@@ -1132,7 +1190,7 @@ function ReadTile(Data) {
 	// Cur += "Data " + Current
 	 CurrentData = TileItems [ Data[Current] ] ;
 	 if (CurrentData) {
-	 XY = CurrentData[1] ;
+		 XY = CurrentData.xy ;
 	 // Cur += " - XY:" + XY + "\n";
 
 RowColumnXY[1] = 0 ;
@@ -1196,12 +1254,21 @@ function ApplyTile( TileObject ) {
 // assigns tile object to selector's point of memory
 
 	XFrom = XYtoCellNumber(SelectorrXY) ; // cells from top left
+	var tc = GetTileContents(CurrentTile.Data[XFrom]);
+	var dtc = GetTileContents(CurrentTile.DevData[XFrom]);
+	tc.TileItem = TileObject;
+	dtc.TileItem = TileObject;
+	
+	CurrentTile.Data[XFrom] = ToRawContents(tc);
+	CurrentTile.DevData[XFrom] = ToRawContents(dtc);
 
+	/*
 	if (isPlayer(CurrentTile.Data[XFrom])) {
 		CurrentTile.DevData[XFrom] = TileObject ;
 		CurrentTile.Data[XFrom] = [ CurrentTile.Data[XFrom][0] , TileObject] ;
 	}
 	else CurrentTile.DevData[XFrom] = TileObject ;
+	*/
 	
 	MapText.value = CurrentTile.DevData ;
 	ShadeTile(TileObject, SelectorpxXY) ; // shade tile

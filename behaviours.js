@@ -1,12 +1,23 @@
+
+BEHAVIOURS = {} ; // all what is possible
+RegisterBehaviour = function(name, procedure) {
+	procedure = procedure || none;	
+	BEHAVIOURS[name] = procedure;
+	return name;
+};
+
+PRE_BATTLE = RegisterBehaviour("prebattle", StartBattle);
+POST_DEFEAT = RegisterBehaviour("postdefeat", StartBattle);
+POST_BATTLE = RegisterBehaviour("postbattle", StartBattle);
+STORY = RegisterBehaviour("story", NoBehaviour);
+
 // NPC constants
 
-PRE_BATTLE = 0 ;
-POST_DEFEAT = 1 ;
-POST_BATTLE = 2 ;
 
-TRAINER = [ PRE_BATTLE, POST_DEFEAT, POST_BATTLE ] ;
+TRAINER = [ [PRE_BATTLE], [POST_DEFEAT], [POST_BATTLE] ] ;
 
-BEHAVIOURS = new Array() ; // all what is possible
+
+MENTOR = [[STORY, 1]] ;
 
 BEHAVIOURS[PRE_BATTLE] = StartBattle ;
 
@@ -17,3 +28,6 @@ function StartBattle(Them) {
 	ENGAGE(this.Number, Them.Number) ;
 }
 
+function NoBehaviour() {
+
+}
