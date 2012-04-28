@@ -989,12 +989,13 @@ function MovedPlayer(pxXY, XY) {
 	// the player has now moved from one space to another
 	this.Move(pxXY) ;
 	this.Character.XY = XY ;
+	var LoS;	
 	PlayerLocation.value = XYtoCellNumber(this.Character.XY) ;
 	
 	var TileData = SetCharacterAt(this.CharacterNumber, XY) ;
 	if (TileData.hasTileItem()) {
 		ThisTile = TileData.TileItem;
-		Metadata = TileData.LoS;
+		LoS = TileData.LoS;
 	
 	/*
 	if ( TileData ) {
@@ -1006,10 +1007,10 @@ function MovedPlayer(pxXY, XY) {
 		var Metadata = TileData[1] ;	
 	}
 	*/
-	
-	var TileEvent = new TileEvents[ThisTile]( TileItems[ThisTile], Metadata ) ;
-		OnTile(TileEvent, this.CharacterNumber, ThisTile) ;
-		
+		if (TileEvents[TileData.TileItem]) {
+			var TileEvent = new TileEvents[ThisTile]( TileItems[ThisTile], LoS ) ;
+			OnTile(TileEvent, this.CharacterNumber, ThisTile) ;
+		}	
 	}
 }
 
@@ -1188,7 +1189,8 @@ function ReadTile(Data) {
 	
 	for (Current=0 ; Current < CurrentEntries ; Current++) {
 	// Cur += "Data " + Current
-	 CurrentData = TileItems [ Data[Current] ] ;
+	var item = Data[Current];
+	 CurrentData = TileItems [ item  ] ;
 	 if (CurrentData) {
 		 XY = CurrentData.xy ;
 	 // Cur += " - XY:" + XY + "\n";
@@ -1200,8 +1202,10 @@ for (CurrentXY[1] = 0 ; CurrentXY[1] < XY[1] ; CurrentXY[1]++) { // y
 		for (CurrentXY[0] = 0 ; CurrentXY[0] < XY[0] ; CurrentXY[0]++) { // x
 			RowColumnXY[0] = CurrentXY[0] ;
 			Calculation =  RowColumnXY[0] + RowColumnXY[1] ; // number of cells from
-				NewData[ Current + Calculation ] = Data[Current]
-				// Cur += "\t :" + CurrentXY[1] + " Current:" + Calculation + " (" + Data[Current] + ")\n" ;
+			var pos = Current + Calculation	
+			NewData[pos] = item
+			
+			// Cur += "\t :" + CurrentXY[1] + " Current:" + Calculation + " (" + Data[Current] + ")\n" ;
 		}
 	RowColumnXY[1] += CurrentTile.XY[0] ;
 }

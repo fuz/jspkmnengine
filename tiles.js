@@ -32,22 +32,6 @@ TileNpcs[1] = [
 
 // name, [x,y], entirely solid, solidity direction
 
-OTileItems = [
-		["Normal",[1,1],,],
-		["Rock",[1,1],1, 3],
-		["Tree",[2,2],1],
-		["Crates",[2,2],1],
-		["Chair",[1,1]],
-		["Pokeball Computer",[2,2],1],
-		["Bookshelf",[2,3],1],
-		["Potted Plant",[1,1],1],
-		["Horizontal Desk",[2,1],1],
-		["Vertical Desk",[1,3],1],
-		["Line of Sight", [0,0], 0],
-		["Grassland",[4,4],1],
-		["Water",[5,5],1]
-		] ;
-
 TileItems = [
 	{name: "Normal", xy: [1,2], solid: false, dsolid: false},
 	{name: "Rock", xy: [1,1], solid: true, dsolid: false },
@@ -60,7 +44,7 @@ TileItems = [
 	{name: "Horizontal Desk", xy: [2,1], solid: true, dsolid: false },
 	{name: "Vertical Desk", xy: [1,3], solid: true, dsolid: false },
 	{name: "Line Of Sight", xy: [0,0], solid: false, dsolid: false },
-	{name: "Grassland", xy: [9,8], solid: true, dsolid: false },
+	{name: "Grassland", xy: [4,4], solid: false, dsolid: false, wildpokemon: true },
 	{name: "Water", xy: [5,5], solid: true, dsolid: false }
 ];
 
