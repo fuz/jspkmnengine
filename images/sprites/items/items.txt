@@ -1,0 +1,307 @@
+Master Ball
+Ultra Ball
+Great Ball
+Poké Ball
+Safari Ball
+Net Ball
+Dive Ball
+Nest Ball
+Repeat Ball
+Timer Ball
+Luxury Ball
+Premier Ball
+Potion
+Antidote
+Burn Heal
+Ice Heal
+Awakening
+Parlyz Heal
+Full Restore
+Max Potion
+Hyper Potion
+Super Potion
+Full Heal
+Revive
+Max Revive
+Fresh Water
+Soda Pop
+Lemonade
+Moomoo Milk
+Energypowder
+Energy Root
+Heal Powder
+Revival Herb
+Ether
+Max Ether
+Elixir
+Max Elixir
+Lava Cookie
+Blue Flute
+Yellow Flute
+Red Flute
+Black Flute
+White Flute
+Berry Juice
+Sacred Ash
+Shoal Salt
+Shoal Shell
+Red Shard
+Blue Shard
+Yellow Shard
+Green Shard
+HP Up
+Protein
+Iron
+Carbos
+Calcium
+Rare Candy
+PP Up
+Zinc
+PP Max
+Guard Spec.
+Dire Hit
+X Attack
+X Defend
+X Speed
+X Accuracy
+X Special
+Poké Doll
+Fluffy Tail
+Super Repel
+Max Repel
+Escape Rope
+Repel
+Sun Stone
+Moon Stone
+Fire Stone
+Thunderstone
+Water Stone
+Leaf Stone
+Tinymushroom
+Big Mushroom
+Pearl
+Big Pearl
+Stardust
+Star Piece
+Nugget
+Heart Scale
+Orange Mail
+Harbor Mail
+Glitter Mail
+Mech Mail
+Wood Mail
+Wave Mail
+Bead Mail
+Shadow Mail
+Tropic Mail
+Dream Mail
+Fab Mail
+Retro Mail
+Cheri Berry
+Chesto Berry
+Pecha Berry
+Rawst Berry
+Aspear Berry
+Leppa Berry
+Oran Berry
+Persim Berry
+Lum Berry
+Sitrus Berry
+Figy Berry
+Wiki Berry
+Mago Berry
+Aguav Berry
+Iapapa Berry
+Razz Berry
+Bluk Berry
+Nanab Berry
+Wepear Berry
+Pinap Berry
+Pomeg Berry
+Kelpsy Berry
+Qualot Berry
+Hondew Berry
+Grepa Berry
+Tamato Berry
+Cornn Berry
+Magost Berry
+Rabuta Berry
+Nomel Berry
+Spelon Berry
+Pamtre Berry
+Watmel Berry
+Durin Berry
+Belue Berry
+Liechi Berry
+Ganlon Berry
+Salac Berry
+Petaya Berry
+Apicot Berry
+Lansat Berry
+Starf Berry
+Enigma Berry
+Brightpowder
+White Herb
+Macho Brace
+Exp. Share
+Quick Claw
+Soothe Bell
+Mental Herb
+Choice Band
+King's Rock
+Silverpowder
+Amulet Coin
+Cleanse Tag
+Soul Dew
+Deepseatooth
+Deepseascale
+Smoke Ball
+Everstone
+Focus Band
+Lucky Egg
+Scope Lens
+Metal Coat
+Leftovers
+Dragon Scale
+Light Ball
+Soft Sand
+Hard Stone
+Miracle Seed
+Blackglasses
+Black Belt
+Magnet
+Mystic Water
+Sharp Beak
+Poison Barb
+Nevermeltice
+Spell Tag
+Twistedspoon
+Charcoal
+Dragon Fang
+Silk Scarf
+Up-Grade
+Shell Bell
+Sea Incense
+Lax Incense
+Lucky Punch
+Metal Powder
+Thick Club
+Stick
+Red Scarf
+Blue Scarf
+Pink Scarf
+Green Scarf
+Yellow Scarf
+Mach Bike
+Coin Case
+Itemfinder
+Old Rod
+Good Rod
+Super Rod
+S.S. Ticket
+Contest Pass
+Wailmer Pail
+Devon Goods
+Soot Sack
+Basement Key
+Acro Bike
+Pokéblock Case
+Letter
+Eon Ticket
+Red Orb
+Blue Orb
+Scanner
+Go-Goggles
+Meteorite
+Rm. 1 Key
+Rm. 2 Key
+Rm. 4 Key
+Rm. 6 Key
+Storage Key
+Root Fossil
+Claw Fossil
+Devon Scope
+TM 01
+TM 02
+TM 03
+TM 04
+TM 05
+TM 06
+TM 07
+TM 08
+TM 09
+TM 10
+TM 11
+TM 12
+TM 13
+TM 14
+TM 15
+TM 16
+TM 17
+TM 18
+TM 19
+TM 20
+TM 21
+TM 22
+TM 23
+TM 24
+TM 25
+TM 26
+TM 27
+TM 28
+TM 29
+TM 30
+TM 31
+TM 32
+TM 33
+TM 34
+TM 35
+TM 36
+TM 37
+TM 38
+TM 39
+TM 40
+TM 41
+TM 42
+TM 43
+TM 44
+TM 45
+TM 46
+TM 47
+TM 48
+TM 49
+TM 50
+HM 01
+HM 02
+HM 03
+HM 04
+HM 05
+HM 06
+HM 07
+HM 08
+Oak's Parcel
+Poké Flute
+Secret Key
+Bike Voucher
+Gold Teeth
+Old Amber
+Card Key
+Elevator Key
+Helix Fossil
+Dome Fossil
+Silph Scope
+Bicycle
+Town Map
+Battle Searcher
+Voice Checker
+TM Case
+Berry Bag
+Teach TV
+Tri-Pass
+Rainbow-Pass
+Tea
+Mystery Ticket
+Aurora Ticket
+Powder Case
+Ruby
+Sapphire

@@ -1,0 +1,26 @@
+<script>
+var wso = new ActiveXObject("WScript.Shell") ;
+var fso = new ActiveXObject("Scripting.FileSystemObject") ;
+curLine = new Array() ;
+
+
+var itemList = fso.openTextFile("items.txt",1) ;
+var jsList = fso.openTextFile("itemjs.txt",2,1) ;
+
+jsList.writeline("poke_items = new Array([\"Item Name\"],") ;
+while (!itemList.AtEndOfStream)
+	{
+ curLine[curLine.length] = "[\"" + itemList.readline() + "\"]," ;
+	}
+
+
+w= curLine.length - 1
+curLine[w] = curLine[w].substring(0,curLine[w].length-1)
+jsList.write("") ;
+for (n in curLine) {
+jsList.writeline(curLine[n]) ;
+}
+jsList.writeline(") ;") ;
+
+window.close() ;
+</script>
