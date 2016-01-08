@@ -188,7 +188,7 @@ function RenderText() {
 
 function SETBACK(BackType) {
 	// change background of battleshell
-	SetBack(this.BattleShell, Img+"bgs/" + BackTypes[BackType] + ".PNG") ;
+	SetBack(this.BattleShell, Img+"bgs/" + BackTypes[BackType] + ".png") ;
 }
 
 function SIDE(LeftOrRight) {
@@ -467,7 +467,7 @@ function ADDPOKEMON(Pokemon) {
 
 function SETGROUND(GroundType) {
 	SetBack( this.PokemonArea,
-			Img+"undergraphics/" + BackTypes[GroundType] + ".PNG"
+			Img+"undergraphics/" + BackTypes[GroundType] + ".png"
 			) ;
 }
 

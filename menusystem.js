@@ -4,7 +4,7 @@ menu_items = [ // name, image, likely to be function to run when executed
 			  ["Pokemon","/sprites/items/rsitem68.png"],
 			  ["Items","/sprites/items/rsitem170.png", ShowInventory],
 			  ["Pokedex","/sprites/items/rsitem296.png"],
-			  ["Me"],
+			  ["Me", "/sprites/trainers/icons/fuz6s.gif"],
 			  ["Save","/sprites/items/rsitem209.png"],
 			  ["Options","/sprites/items/rsitem172.png"],
 			  ["Cancel","/sprites/items/rsitem168.png", CloseMenu]

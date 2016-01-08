@@ -269,7 +269,7 @@ function RenderAttacks() {
 		this.AttackLabels[CurrentAttack] = AttackText ;
 		
 		cell.appendChild(AttackName) ;
-		cell.style.backgroundImage= "url(images/bgs/grass.PNG)" ;
+		cell.style.backgroundImage= "url(images/bgs/grass.png)" ;
 		
 		var PP = document.createElement("div") ;
 		PP.className = "PPcontainer" ;

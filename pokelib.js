@@ -334,7 +334,7 @@ function ChangeGround( GroundType ) {
 	SetBack(
 			[document.getElementById("poke" + this.Player),
 			document.getElementById("poke" + this.Player).style],			
-	Img+"undergraphics/" + BackTypes[GroundType] + ".PNG")
+	Img+"undergraphics/" + BackTypes[GroundType] + ".png")
 
  // document.getElementById("poke" + this.Player).style.backgroundImage = "url(\"images/undergraphics/" + BackTypes[GroundType] + ".PNG\")" ;
 }
@@ -342,7 +342,7 @@ function ChangeGround( GroundType ) {
 
 function ChangeBack( BackType ) {
 // Changes the battle interface background
- var Cur = "images/bgs/" + BackTypes[BackType] + ".PNG" ;
+ var Cur = "images/bgs/" + BackTypes[BackType] + ".png" ;
  bgChange("battle", Cur ) ;
 }
 

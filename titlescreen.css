@@ -5,7 +5,7 @@
 
 .title {
 	text-align: center;
-	background-image:url('images/bgs/grass.PNG');
+	background-image:url('images/bgs/grass.png');
 	border: thin ridge #0066FF;
 	border-bottom: none;
 
@@ -30,7 +30,7 @@
 	/* border: thin ridge #0066FF;
 	border-top: none;
 	border-bottom:none; */
-	background-image:url('graphics/titlescreen.PNG') ;
+	background-image:url('graphics/titlescreen.png') ;
 	
 	background-repeat:no-repeat;
 	background-position:50% 50%;
@@ -45,7 +45,7 @@
 	text-align: center;
 	table-layout:fixed;
 	border: thin ridge #0066FF;
-	background-image:url('images/bgs/grass3.PNG') ;
+	background-image:url('images/bgs/grass3.png') ;
 }
 
 #menu img {
@@ -60,5 +60,5 @@
 #menu a:hover {
 	font-size: small;
 	font-weight: bold;
-	background-image:url('images/bgs/water.PNG') ;
+	background-image:url('images/bgs/water.png') ;
 }

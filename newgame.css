@@ -1,13 +1,13 @@
 #newgame {
 	height:187px;
-	background-image:url('graphics/newgamebg.PNG');
+	background-image:url('graphics/newgamebg.png');
 	background-repeat:repeat-x;
 	border:thin ridge #0099FF;
 	border-bottom:none;
 }
 
 #gameslist tr {
-	background-image:url('images/bgs/grass.PNG');
+	background-image:url('images/bgs/grass.png');
 	padding:3px;
 }
 

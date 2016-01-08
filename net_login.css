@@ -17,7 +17,7 @@
 #netcenter {
 	height:155px;
 	clear: both;
-	background-image:url('graphics/login_screen.PNG') ;
+	background-image:url('graphics/login_screen.png') ;
 }
 
 #credentials {
@@ -26,16 +26,16 @@
 }
 
 #username {
-	background-image: url(images/bgs/water.PNG);
+	background-image: url(images/bgs/water.png);
 }
 
 #password {
-	background-image: url(images/bgs/water.PNG);
+	background-image: url(images/bgs/water.png);
 }
 
 #login_button {
 	margin-bottom: 0px;
-	background-image: url(images/bgs/grass2.PNG);
+	background-image: url(images/bgs/grass2.png);
 }
 
 #loginscreen label {
