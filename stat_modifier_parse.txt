@@ -1,0 +1,97 @@
+var output = "" ;
+
+var rls = pokemon[0][4] ;
+
+
+sl = [] ;
+sl["SPECIAL DEFENSE"] = 5
+sl["ATTACK"] = 1 ;
+sl["HP"] = 0 ;
+sl["DEFENSE"] = 2 ;
+sl["SPECIAL ATTACK"] = 4
+sl["SPEED"] = 3 ;
+
+var stats = [] ;
+
+for (var cur_attack = 1 ; cur_attack < attacks.length ; cur_attack++) {
+output += attacks[cur_attack][0] + "\n" ;
+AttackData = attacks[cur_attack] ;
+
+d = undefined
+
+if (AttackData[5].indexOf("user's") != -1) {
+  var d = processd(AttackData[5]) ;
+  output += " - users mods:\n" ;
+}
+else if (AttackData[5].indexOf("opponent's") != -1) {
+  var d = processd(AttackData[5]) ;
+  output += " - enemy mods:\n" ;
+}
+if (d) {
+ output += d[0] + " "  + rls[ d[1] ] + "\n";
+}
+
+output += "\n" ;
+}
+MapText.value = output ;
+
+function processd(d) {
+var ssign = upordown(d) ;
+if (isNaN(ssign)) {
+ return ;
+}
+
+var changed = [] ;
+if ( d.indexOf("SPECIAL ATTACK") != -1 ) {
+output += rls[ sl["SPECIAL ATTACK"] ] + "\n" ;
+changed.push( sl["SPECIAL ATTACK"] ) ;
+
+} else if ( d.indexOf("ATTACK") != -1 ) {
+output += rls[ sl["ATTACK"] ] + "\n" ;
+changed.push( sl["ATTACK"] ) ;
+}
+
+if ( d.indexOf("SPECIAL DEFENSE") != -1 ) {
+output += rls[ sl["SPECIAL DEFENSE"] ] + "\n" ;
+changed.push( sl["SPECIAL DEFENSE"] ) ;
+} else if ( d.indexOf("DEFENSE") != -1 ) {
+output += rls[ sl["DEFENSE"] ] + "\n" ;
+changed.push( sl["DEFENSE"] ) ;
+}
+
+if ( d.indexOf("SPEED") != -1 ) {
+output += rls[ sl["SPEED"] ] + "\n" ;
+changed.push( sl["SPEED"] ) ;
+}
+if (changed.length > 0) {
+var times = getordinal(d) ;
+if (isNaN(times)) {
+ return ;
+}
+
+return [times*ssign,changed] ;
+
+}
+
+
+}
+
+function upordown(d) {
+ if ( d.indexOf("raises") != -1 || d.indexOf("Raises") != -1 ) {
+  output += "up "
+  return 1 ;
+}
+else if (d.indexOf("lower") != -1 || d.indexOf("Lowers") != -1) {
+ output += "down " ;
+ return -1 ;
+}
+}
+
+function getordinal(d) {
+if ( d.indexOf("one") != -1 ) {
+return 1 ;
+}
+else if (d.indexOf("two") != -1 ) {
+return 2 ;
+} 
+}
