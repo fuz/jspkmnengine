@@ -4,9 +4,9 @@ TileObject = new Array() ;
 TilePlaces = new Array() ;
 
 
-// filename, global offset, size, player positions, music
+// filename, global offset, size, music
 Tiles = [
-		 ["safari.png",[0,-3],[80,80] ],
+		 ["safari.png",[0,-3],[80,80]],
 		 ["mentorlab.png",[0,0],[13,13], 2]
 		 ] ;
 

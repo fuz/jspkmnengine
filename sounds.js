@@ -2,7 +2,7 @@
 
 // music tracks
 music = [["Track Name","Filename"],
-		 ["Dewford","PkmRS_Dewford.mid"],
+		 ["Slateport","PkmRS-Slateport.mid"],
 		 ["Laboratory","PKMNGS_Professor_Elm%27s_Lab.mid"]
 		 ] ;
 

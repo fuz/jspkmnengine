@@ -23,7 +23,7 @@ var devmode = 0 ;			// temporary development mode
 tick = 30 ; 				// update delay
 
 OPTIONS = {
-	Music: false,
+	Music: true,
 	Netplay: false
 }
 
