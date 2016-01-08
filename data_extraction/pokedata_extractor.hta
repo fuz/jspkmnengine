@@ -1,0 +1,380 @@
+<HTA:APPLICATION ID="pokextract" 
+    APPLICATIONNAME="Pokemon Data FAQ Extractor">
+<html>
+<head>
+
+</head>
+
+<body>
+<script language="javascript" type="text/javascript"> // pokemon = new Array() ; </script>
+<script src="general.js" language="javascript" type="text/javascript"></script>
+<script src="general2.js" language="javascript" type="text/javascript"></script>
+<script src="_dev_copy.js" language="javascript" type="text/javascript"></script>
+
+<script language="javascript" type="text/javascript">
+stats = ["Name",["Type"],"Gender Ratio","Houen National Translation",["HP","Attack","Defense","Speed","Special Attack","Special Defense"],"Pokedex Category","EV","National Houen Translation"] ;
+
+for (a in stats[4]) {
+stats[ stats[4][a].toLowerCase() ] = a ;
+}
+
+wordify("pokemon",0) ;
+</script>
+
+
+
+<script language="javascript" type="text/javascript">
+
+
+
+var jscode = "" ;
+var jscode2 = "" ;
+var jscode3 = "" ;
+
+var strings = new Array() ;
+var strings2 = new Array() ;
+var strings3 = new Array() ;
+
+var wso = new ActiveXObject("WScript.Shell") ;
+var fso = new ActiveXObject("Scripting.FileSystemObject") ;
+
+</script>
+
+
+<script src="images\sprites\items\generator.js" language="javascript" type="text/javascript"></script>
+<script src="attacklist.js" language="javascript" type="text/javascript"></script>
+<script src="natures.js" language="javascript" type="text/javascript"></script>
+<script src="typeslist.js" language="javascript" type="text/javascript"></script>
+<script language="javascript" type="text/javascript">
+
+var houen_data = fso.openTextFile("houen_pokedata.txt",1) ;
+houen_pattern = new RegExp("^[0-9]*\. ","gi") ;
+houen_pokemon = new Array() ;
+
+function houen() { cur_n = 1 ;
+var houen_data = fso.openTextFile("houen_pokedata.txt",1) ;
+var nationalhouen =  fso.openTextFile("nationalhouen.txt",2,1) ;
+
+while (!houen_data.AtEndOfStream)
+	{ curLine = houen_data.readline().toLowerCase() ;
+// curLine = curLine.replace(/\d\d\d\. /gi,"") ;
+
+curLine = curLine.replace(houen_pattern,"") ;
+n = pokemon[ curLine ] ;
+
+// document.writeln(curLine + ": " + n + " & " + cur_n + "<br>") ;
+
+nationalhouen.writeline(n) ;
+pokemon[ cur_n ][3] = n ;
+pokemon[ n ][7] = cur_n ;
+// NHCheck
+cur_n++ ;
+	}
+		}
+
+houen() ;
+
+function NHCheck(N,B) {
+function cont(C) {
+document.write(pokemon[C][3] + "<br>") ;
+	}
+
+if (B) {
+for(curPoke=1;curPoke<386;curPoke++) { cont(curPoke) ; }
+	}
+else cont(N)
+}
+
+
+var Gender = 0 ;
+var Stats = new Array("HP","Attack","Defense","Speed","Sp Att","Sp Def") ;
+var Data = new Array("Type","Egg group","Gender Ratio","Pokedex Category","EVs RFB","Base Stats") ;
+var allData = new RegExp("(" + Data.join("|") + "): |%| Male,| Female", "g") ;
+var statRemove = new RegExp("(" + Stats.join("|") + ") ","g") ;
+var pokeNum = new RegExp("(\\d\\d\\d) - (.*)") ;
+// alert(pokeNum) ;
+
+
+var curPoke ;
+
+var pk_types = new Array(["Type","Colour","Afflictions"],
+["???"],
+["Normal","darkgrey"],
+["Fighting","brown"],
+["Flying","pink"],
+["Poison","purple"],
+["Ground","brown"],
+["Rock","darkgrey"],
+["Bug","black"],
+["Ghost","teal"],
+["Steel","lightgrey"],
+
+["Fire","orange"],
+["Water","blue"],
+["Ice","lightblue"],
+["Electric","yellow"],
+["Dark","black"],
+["Grass","green"],
+["Dragon","orange"],
+["Psychic","purple"]
+) ;
+
+
+
+
+function pokeList() {
+// var pokemon = new Array() ;
+wordify("pk_types", 0) ;
+
+
+
+// pokemon[0] = "Ferret" ;
+/*
+001 - Bulbasaur
+Type: Grass/Poison
+Locations: Starter in Pallet Town
+Egg group: Monster/Plant
+Ability: Overgrow[Grass attacks become stronger with less than 1/3 HP]
+Gender Ratio: 87.5% Male, 12.5% Female
+Pokedex Category: Field
+EVs RFB: 1 Special Attack
+5120 Steps to hatch from egg
+Base Stats: HP 45/Attack 49/Defense 49/Speed 45/Sp Att 65/Sp Def 65
+Evolution: -> Ivysaur(Level 16) -> Venusaur(Level 32)
+*/
+
+var pokedex = fso.openTextFile("pokemon_frlg_pokedex.txt",1) ;
+
+
+var houendex =  fso.openTextFile("nationalhouen.txt",1) ;
+
+
+
+var dexList = new Array() ; dexList[0] = 0 ;
+var dexList2 = new Array() ; dexList2[0] = 0 ;
+
+var evList = new Array() ; evList[0] = 0 ;
+var evList2 = new Array() ; evList2[0] = 0 ;
+ 
+while (!pokedex.AtEndOfStream)
+				{ 
+curLine = pokedex.readline() ;
+matchy = curLine.match(pokeNum) ; 
+ if ( matchy ) 
+	{ curPoke = parseFloat(matchy[1]) ; 	// temporary pokemon's number
+ pokemon[ curPoke ][0] = matchy[2] ; // numbered array
+pokemon[ matchy[2].toLowerCase() ] = curPoke	// associative array for pokemon
+// alert( pokemon[ curPoke ][0] ) ;
+
+	}
+else
+{
+matchy = curLine.match(allData) ;
+if (matchy)
+	{ curLine = curLine.replace(allData,"").replace(statRemove,"") ;
+// alert("Line: " + curLine + "\nMatch: " + matchy[0] + "\nAll Matches: " + matchy) ;
+
+switch( matchy[0].substring(0,matchy[0].length - 2) )
+			{ 
+
+	case Data[0]: // Pokemon Type
+		curLine = curLine.toLowerCase().split("/") ;
+		pokemon[curPoke][1] = new Array() ;
+		for ( tn in curLine ){
+		pokemon[curPoke][1][tn] = pk_types[ curLine[tn] ] ;
+		// alert( pokemon[curPoke][1][tn] ) ;
+	}		; break ;
+	
+
+	case Data[2]: // Gender Ratio
+		curLine = curLine.split(" ") ;
+		Male = parseFloat( curLine[0] ) ;
+		Female = parseFloat( curLine[1] ) ;
+		// alert(Male + "\n" + Female) ;
+		 if ( (Male + Female) !== 100) Gender = 0				// 0 = Genderless					0/0
+		 else if (Male == 100 && Female == 0) Gender = 2 		// 2 = Always Male				100/0
+		 else if (Female ==100 && Male == 0) Gender = 3		// 3 = Always Female				0/100
+		 else if (Male == 50 && Female == 50) Gender = 1		// 1 = 50/50 Chance for Male OR Female	50/50
+		 else if (Male == 87.5 && Female == 12.5) Gender = 4		// 4 = Mostly Male 				87.7/12.5
+		 else if (Male == 75 && Female == 25) Gender = 5		// 5 = Usually Male 				75/25
+		 else if (Female == 75 && Male == 25)  Gender = 6		// 6 = Usually Female 				25/75
+		pokemon[curPoke][2] = Gender ;
+		// alert(Gender) 
+		
+		; break ;
+	case Data[3]:		// Pokedex Category
+	 if ( isUndefined(dexList[ curLine ]) ) { n = dexList2.length ;
+ 	dexList[ curLine ] = n ;
+ 	dexList2[n] = [curLine]
+
+	jscode2 += arrayToLiteral( dexList2[n], strings3, "dexList2[n]") + ",\r\n" ;
+	}
+	pokemon[curPoke][5] = dexList[ curLine ] ;
+
+		; break ;
+
+
+	case Data[4]:		// EVS
+	
+	curLine2 = curLine.toLowerCase().split(",") ;
+	// alert("h" + curLine2) ;
+	pokemon[curPoke][6] = new Array() ;
+	for (a in curLine2) {
+	 temp = parseInt(curLine2[a]) ;
+	 // curLine2[a] = curLine2[a].replace(/^ *\d|( )$/,"") ;
+	// alert(":" + curLine2[a] + ":") ;
+		if ( isUndefined(evList[ curLine2[a] ]) ) { n = evList2.length ;
+		 evList[ curLine2[a] ] = n ;
+		
+		 evList2[n] = [ parseInt(stats[ curLine2[a].replace(/^ *\d |( )$/,"") ]) , temp ] ;
+		jscode3 += arrayToLiteral( evList2[n], strings2, "evList2[n]") + ",\r\n" ;
+		}
+	pokemon[curPoke][6][pokemon[curPoke][6].length] = evList[ curLine2[a] ] ;
+	}
+
+	; break ;
+	
+	case Data[5]: // Base Statistics
+		// if (curPoke == 386) alert(curLine) ;
+		curLine = curLine.replace("(R/S)","") ;
+		strings = new Array() ;
+		curLine = curLine.split("/") ;
+		pokemon[curPoke][4] = new Array() // make new array for the base statistics
+		cnt = 0 
+		for (n in  curLine) { d = parseInt(curLine[n]) ; // alert(d) ;
+		 if ( !isNaN(d) ) { pokemon[curPoke][4][cnt] = d ; cnt++ ; }
+		  }
+/******
+		pokemon[curPoke][3] = 0
+
+		if (!houendex.AtEndOfStream) // Add Houen National translation
+		  { houen_t = parseInt( houendex.readline() ) ;
+			pokemon[curPoke][3] = houen_t ;
+		}
+*////////
+
+	
+
+		//  add code to list
+jscode += arrayToLiteral(pokemon[curPoke],strings,"pokemon[curPoke]") + ",\r\n" ;
+		; break ;
+			} // End Switch
+	
+	} // End Valuable Data
+}
+				} // End Pokedex read stream
+
+datafile = fso.openTextFile("new_pokemondata.js",2,1) ;
+// datafile.writeline("var pokemon = new Array([\"Name\",[\"Type\"],\"Gender Ratio\",\"Houen National Translation\",[\"HP\",\"Attack\",\"Defense\",\"Speed\",\"Special  Attack\",\"Special Defense\"],\"Pokedex Category\",\"EV\",\"National Houen Translation\"],") ;
+initial = [] ;
+datafile.writeline( "pokemon = new Array(" + arrayToLiteral(stats,initial,"stats") + ",");
+
+datafile.write(jscode.substring(0, jscode.length - 3) + "\r\n ) ;") ;
+jscode = "" ; datafile.write("\r\n") ;
+datafile.write("var cat_list = new Array([\"Category Name\"],\r\n") ;
+datafile.write(jscode2.substring(0, jscode2.length - 3) + "\r\n ) ;") ;
+
+datafile.write("\r\n") ;
+datafile.write("var ev_list = new Array([\"Stat\",\"EV\"],\r\n") ;
+datafile.write(jscode3.substring(0, jscode3.length - 3) + "\r\n ) ;") ;
+} // end
+
+
+pokeList() ;
+NaturesList()
+itemList() ;
+attackList() ;
+TypeList()
+
+
+
+datafile.close() ;
+
+
+/*
+function objectToLiteral(a,ext,namestr){
+  var s="{ ",e;
+  for(e in a){
+    s+=e+":";
+    if(a[e]==null)
+      s+="null";
+    else if(typeof(a[e])=="object"){
+      if(a[e].constructor==Array)
+        s+=arrayToLiteral(a[e],ext,namestr+"[\""+e+"\"]");
+      else if(a[e].constructor==Object)
+        s+=objectToLiteral(a[e],ext,namestr+"[\""+e+"\"]");
+      }
+    else if(typeof(a[e])=="number" || typeof(a[e])=="boolean")
+      s+=a[e];
+    else if(typeof(a[e])=="string")
+      s+="\""+a[e]+"\"";
+    s+=",";
+    }
+  return s.substr(0,s.length-1)+" }";
+  }
+function arrayToLiteral(a,ext,namestr){
+  var s="[",e;
+  for(var dex=0; dex<a.length; dex++){
+    e=a[dex];
+    if(e==null)
+      s+="null";
+    else if(typeof(e)=="object"){
+      if(e.constructor == Array)
+        s+=arrayToLiteral(e,ext,namestr+"["+dex+"]");
+      else if(e.constructor==Object)
+        s+=objectToLiteral(e,ext,namestr+"["+dex+"]");
+      }
+    else if(typeof(e)=="number" || typeof(e)=="boolean")
+      s+=e;
+    else if(typeof(e)=="string")
+      s+="\""+e+"\"";
+    s+=",";
+    }
+  for(dex in a){
+    if(parseInt(dex).toString()==dex)continue;
+    e=a[dex];
+    var s2=namestr+"[\""+dex+"\"]=";
+    if(e==null)
+      s2+="null";
+    else if(typeof(e)=="object"){
+      if(e.constructor == Array)
+        s2+=arrayToLiteral(e,ext,namestr+"[\""+dex+"\"]");
+      else if(e.constructor==Object)
+        s2+=objectToLiteral(e,ext,namestr+"[\""+dex+"\"]");
+      }
+    else if(typeof(e)=="number" || typeof(e)=="boolean")
+      s2+=e;
+    else if(typeof(e)=="string")
+      s2+="\""+e+"\"";
+    ext.push(s2)
+    }
+  return s.substr(0,s.length-1)+"]";
+  }
+*/
+
+
+
+/*
+alldump = dumpArray( pokemon, "pokemon" ) ;
+var dumpfile = fso.openTextFile("new_pokemondata99999.js",2,1) ;
+dumpfile.write(pokemon) ;
+strings = new Array() ;
+document.open("text/html") ;
+document.write( "pokemon = new Array(<BR>" + arrayToLiteral(pokemon,strings,"pokemon") + strings.join(" ;<BR>") ) ;
+
+dumpfile.write( "pokemon = new Array(\n" + arrayToLiteral(pokemon,strings,"pokemon") + strings.join(" ;\r\n") ) ;
+alert(strings) ;
+*/
+
+// window.close() ;
+
+</script>
+
+
+
+</body>
+</html>
+
+
+
+
