@@ -1,0 +1,71 @@
+<html>
+
+<head>
+<title>Improfane's Pokedex</title>
+<meta name="author" content="Improfane">
+<meta name="generator" content="Namo WebEditor v6.0">
+<script src="filterlist.js" language="javascript" type="text/javascript"></script>
+<script src=".../pokemon_data.js" language="javascript" type="text/javascript"></script>
+<style>
+body { font-family: Verdana ; }
+input,select,table { background-color:rgb(153,204,255); }
+.baby { font-size:8pt; }
+.pokemonName { font-size:36; }
+</style>
+<script language="javascript" type="text/javascript">
+// Code from http://javascript.internet.com/forms/passing-values-source.html
+// very useful for settings etc,
+function getParams() {
+var idx = document.URL.indexOf('?');
+var params = new Array();
+if (idx != -1) {
+var pairs = document.URL.substring(idx+1, document.URL.length).split('&');
+for (var i=0; i<pairs.length; i++) {
+nameVal = pairs[i].split('=');
+params[nameVal[0]] = nameVal[1];
+   }
+}
+return params;
+}
+params = getParams();
+
+
+</script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="purple" alink="red">
+<form name="impdex">
+<table border="0" align="center" width="100%">
+    <tr class="baby">
+        <td width="770" height="11">PokéDex</td>
+        <td width="214" height="11"><input type="text" name="pokesearch"></td>
+    </tr>
+    <tr>
+            <td width="770" height="44">
+
+&nbsp;            </td>
+        <td width="214" height="222" rowspan="2">
+            <p><select name="pokemonlist" size="15">
+</select></p>
+        </td>
+    </tr>
+    <tr>
+        <td width="770" height="173">&nbsp;</td>
+    </tr>
+    <tr class="baby">
+        <td width="770" height="22">
+            <p>[ Credits | Settings | Help ]</p>
+        </td>
+        <td width="214" height="22"><br><select name="sortmodes" size="1">
+                    <option selected>Sort by</option>
+</select></td>
+    </tr>
+</table>
+
+
+            <p align="center">© 1999-2005&quot;PokéMon&quot;,&quot;PokeDex&quot; and all related data trademark/copyright of Nintendo/Creatures or respective owners.</p>
+</form>
+<p>&nbsp;</p>
+</body>
+
+</html>

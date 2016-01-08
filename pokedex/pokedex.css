@@ -1,0 +1,27 @@
+.body {
+	margin: auto;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: 900;
+}
+#Selection {
+	float: right;
+}
+#License {
+	clear: both;
+	text-align: center;
+	font-size: 9pt;
+}
+#Data {
+	float: left;
+}
+.DataLabel {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-transform: uppercase;
+	color: #666666;
+	letter-spacing: 1em;
+}
+.Menu {
+	text-transform: lowercase;
+	letter-spacing: 2pt;
+	text-align: left;
+}

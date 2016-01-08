@@ -1,0 +1,157 @@
+<html>
+
+<head>
+<title>Improfane's Pokedex</title>
+<meta name="author" content="Improfane">
+<meta name="generator" content="Namo WebEditor v6.0">
+<script src="../general.js" language="javascript" type="text/javascript"></script>
+<script src="../new_pokemondata.js" language="javascript" type="text/javascript"></script>
+<script src="filterlist.js" language="javascript" type="text/javascript">
+// Filterlist 
+</script>
+
+<style>
+body { font-family: Verdana,Arial ; }
+#dexdata { float:left; }
+#datasel { float:right; }
+#copyright { clear:both; }
+.baby { font-size:8pt; }
+.pField { font-family:Courier;font-size: 12pt;color:#999999; }
+.pData { font-size:16pt; }
+#pokeurl { font-size:8pt; }
+
+
+</style>
+
+<script language="javascript" type="text/javascript">
+wordify("pokemon",0) ;
+// wordify("pk_types",0) ;
+var pokefilter, impdex, pList,pData
+
+function fillDex(Order)
+{ impdex = document.forms["impdex"] ; pData = document.getElementById("dexdata") ;
+pList = impdex.pokemonlist ;
+pList.options.length = 0 ;
+var curEntry = 0;
+// new Option('new text','new value');
+for (curEntry = 1; curEntry < pokemon.length ; curEntry++)
+	{
+pList.options[curEntry - 1] = new Option(pokemon[curEntry][0], curEntry) ;
+	}
+	
+pokefilter = new filterlist(pList) ;
+pokefilter.set_ignore_case(true) ;
+pokefilter.searchorfind = true ;
+
+
+if (params["pokemon"])
+ { 
+	changeDex(params["pokemon"],params["pokemon"]) ;
+ }
+
+}
+
+function changeDex(pID, pName)
+	{ // updates the pokedex to the specified ID number or name
+n = pokemon[parseInt(pID)] ;
+if (n) pID = parseInt(pID)
+else if(pokemon[pName.toLowerCase()] && pName) pID = pokemon[pName.toLowerCase()] ;
+if (pokemon[pID]) {
+ { xn = "<br><u>"
++ addData( pokemon[pID][0], pokemon[0][0] )
++ "</u><br>"
++ "<font color=" + pk_types[ pokemon[pID][1][0] ][1] + ">"
++ addData( pk_types[ pokemon[pID][1][0] ][0], pokemon[0][1][0] ) + "</font>" ;
+ if (window.pokemon[pID][1][1]) { xn += " / <font color=" + pk_types[ pokemon[pID][1][1] ][1] + ">" + addData( pk_types[ pokemon[pID][1][1] ][0], pokemon[0][1][1] ) + "</font>" ; }
+xn+= "<br>" ; switch(pokemon[pID][2]) {
+case 0: xn += "Genderless ( 0% Male/0% Female )" ; break ;
+case 1: xn += "Even ( 50% Male/50% Female )" ; break ;
+case 2: xn += "Always Male ( 100% Male/0% Female )" ; break ;
+case 3: xn += "Always Female ( 0% Male/100% Female )" ; break ;
+case 4: xn += "Mostly male ( 87.5% Male/12.5% Female )" ; break ;
+case 5: xn += "Usually Male ( 75% Male/25% Female )" ; break ;
+case 6: xn+= "Usually Female ( 25% Male/75% Female )" ; break ; }
+pData.innerHTML = xn ;
+
+impdex.pokeurl.value = unescape(document.location) + "?pokemon=" + pID
+}
+
+/* if ( (Male + Female) !== 100) Gender = 0				// 0 = Genderless					0/0
+	 else if (Male == 100 && Female == 0) Gender = 2 		// 2 = Always Male				100/0
+	 else if (Female ==100 && Male == 0) Gender = 3		// 3 = Always Female				0/100
+	 else if (Male == 50 && Female == 50) Gender = 1		// 1 = 50/50 Chance for Male OR Female	50/50
+	 else if (Male == 87.5 && Female== 12.5) Gender = 4		// 4 = Mostly Male 				87.7/12.5
+	 else if (Male == 75 && Female == 25) Gender = 5		// 5 = Usually Male 				75/25
+	 else if (Female == 75 && Male == 25)  Gender = 6		// 6 = Usually Female 				25/75
+	 */
+
+// alert(pk_types[ pokemon[pID][1][0] ][1]) ;
+ /* addData( pokemon[pID][0], pokemon[0][0] ) ;
+ addData( pk_types[ pokemon[pID][1][0] ][0], pokemon[0][1][0] ) ;
+ impdex.pokeurl.value = document.location + "?pokemon=" + pID ; */
+ // fillData(pokemon[pID]) ;
+ }
+	}
+	
+	
+
+function addData( Data, Name, Title) 
+{ xn = "" ; 
+if (Title) xn = "<br><a class=pField>" + Name + "</a> -" ;
+if (Data) return xn + "<a class=pData>" + Data + "</a>" ;
+}
+
+/*
+function fillData(pID)		{
+ for (fields in pID)
+ { // if (typeof pID[fields] == "object" && pID[fields].constructor == Array)
+	// fillData( pID[fields], fields ) ;
+// else
+pData.innerHTML += "<br><a class=pField>" + pokemon[0][fields] + "</a> - <a class=pData>" + pID[fields] + "</a>" ;
+
+ }
+ 							} 
+
+function populate(cur, pID)		{
+ for (fields in cur)
+ { if (typeof cur[fields] == "object" && cur[fields].constructor == Array)
+	populate(cur[fields], pID[fields]) ;
+  	xn += "<br><a class=pField>" + cur[fields].toUpperCase() + "</a><br><a class=pData>" ;
+if (cur[fields] == pokemon[0][1][0]) //type 1
+{ xn += pk_types[pID[fields]] ; }
+xn += pID[fields] ;
+
+	pData.innerHTML =  xn + "</a>" ;
+
+ 
+ }
+						} */
+		
+function copyURL(copy)
+	{ impdex.pokeurl.select() ;
+if (copy) document.execCommand('Copy') ; // will copy to clipboard only if IE
+	}
+</script>
+
+</head>
+<body bgcolor="white" text="black" link="blue" vlink="purple" alink="red" onload="fillDex();">
+<form name="impdex">
+<input type="text" name="pokeurl" id="pokeurl" size="80" onclick="copyURL();">
+[<a href="javascript:copyURL(1);">c</a>]
+<div id="dexdata">
+</div><div id="datasel">
+
+<p><input type="text" name="pokesearch" size="16" onkeyup="pokefilter.set('^' + this.value);"></p>
+        <p style="page-break-before:always;"><select name="pokemonlist" size="20" onclick="changeDex(this.options[this.options.selectedIndex].value);">
+</select></p>
+        <p><select name="sortmodes" size="1">
+            <option selected>Sort</option>
+</select></p></div></form>
+        <div id="copyright" class="baby">     <p align="center">[ Credits | Settings | Help ]<br>© 2005 Improfane, Javascript Pokedex<br>© 1999-2005 PokéMon&quot;,&quot;PokeDex&quot; and all related data trademark/copyright of Nintendo/Creatures or respective owners.</p>
+</div>
+<form name="form1">
+<p align="center"><textarea name="debug" rows="3" cols="58">alert( pokemon[125][0] ) ;</textarea><input type="button" name="godebug" value="Run" onclick="eval(document.form1.debug.value);"></p>
+</form>
+</body>
+
+</html>
