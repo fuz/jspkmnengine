@@ -44,7 +44,6 @@ function nTalk(Their) {
 		nextSpeech = (nextBehaviour.length > 1 ? nextBehaviour[1] : 0)
 	}
 
-		
 	this.Say( nextSpeech, mode ) ;
 	// npc needs to be able to do something else other than battle
 	

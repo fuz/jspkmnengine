@@ -627,7 +627,7 @@ function SetCharacterAt(CharacterNumber, XY) {
 	return tc;
 
 	// todo: remove below
-
+  /*
 	if ( typeof TileUnderneath == "number" ) { // a tile item exists underneath the player
 	 // the player is now ontop of this tile
 	 CurrentTile.Data[ cell ] = [ CharacterNumber, TileUnderneath ] ;
@@ -640,6 +640,7 @@ function SetCharacterAt(CharacterNumber, XY) {
 	} else { // only the player is here
 	 CurrentTile.Data[ cell ] = [ CharacterNumber ] ;
 	}
+  */
 }
 
 function SetObjectAt(XY, CharacterNumber) {

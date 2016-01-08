@@ -5,7 +5,6 @@ GAME_MODES = [
 	this.Author = "fuz" ;
 	this.New = function() { // called upon new game
 		
-		Audio(0, 1) ;
 		
 		ClearOutput() ;
 		Put( ["What is your name?", RequestData( this, this.Continue) ] );
@@ -51,7 +50,6 @@ GAME_MODES = [
 	SetCharacterPlace( ActiveCharacter , 0 , 1) ;
 		ActiveCharacterAction() ; // interact with the mentor
 		changeinterface(1) ; // go to map to player can see himself
-	
 			}
 	}
 ]
