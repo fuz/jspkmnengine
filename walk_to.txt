@@ -1,0 +1,14 @@
+tch = character_pool[1] ;
+ActiveCharacter.Position( [7,7] );
+
+tch.Position([6,6]) ;
+tch.Sprite.WalkTo([13,7]) ;
+
+
+tch = character_pool[1] ;
+ActiveCharacter.Position( [7,7] );
+
+tch.Position([6,6]) ;
+tch.Sprite.Path=[6,6,4,4,4,4,6,6,4,4,4,4,6,6,4 ,4,4,1,1,1,1,3,3,1,3,3,3] ;
+alert( tch.Sprite.Path.length );
+tch.Sprite.RunPath() ;

@@ -1,0 +1,11 @@
+var ball_list = [] ;
+
+for (var curitem = 0 ; curitem < poke_items.length ; curitem++) {
+var current = poke_items[curitem][0].toLowerCase() ;
+if (current.indexOf("ball") !=-1) {
+ ball_list.push([curitem]) ;
+ MapText.value += curitem + " " + current + "\n" ;
+}
+}
+
+MapText.value = MapText.value + "\n" + ball_list.toJSONString().replace(/,/gi,"\n")

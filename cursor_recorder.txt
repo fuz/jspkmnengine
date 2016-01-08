@@ -1,0 +1,52 @@
+
+function RecordMouse(seconds) {
+var cur = 0 ;
+var interval = 50 ;
+var stop = (seconds * 1000) / interval
+
+var looper = setInterval(NoteCoords, interval) ;
+var previous = [0,0] ;
+var delta = [] ;
+
+
+ function NoteCoords() {
+  if (cur >= stop) {
+   clearInterval(looper) ;
+   return ;
+  }
+  delta.push( [UMouse[0]-previous[0],UMouse[1]-previous[1] ] ) ;
+  previous = UMouse ;
+  MapText.value += delta[delta.length-1] + "\n" ;
+  cur++
+ }
+}
+
+
+Coords = MapText.value.split("\n") ;
+alert(Coords.toJSONString() ) ;
+
+for (curcoord = 0 ; curcoord < Coords.length ; curcoord++) {
+ Coords[curcoord] = Coords[curcoord].split(",") ;
+ Coords[curcoord][0] = parseInt(Coords[curcoord][0])
+ Coords[curcoord][1] = parseInt(Coords[curcoord][1])
+}
+alert(Coords.toJSONString() ) ;
+
+function CoordsAnimation(list) {
+ var cur = 0 ;
+ var looper = setInterval(readcoord,50)
+  function readcoord() {
+   if (cur == list.length) { clearInterval(looper) ; return }
+
+   
+  
+   deltax = (parseInt( SIDES[_left].GoPokeball[_style].left) | 0) + list[cur][0] ;
+   deltay = (parseInt( SIDES[_left].GoPokeball[_style].top) | 0) + list[cur][1] ;
+   SetPos(SIDES[_left].GoPokeball,[deltax,deltay]) ;
+   
+   cur++
+ }
+}
+
+CoordsAnimation(Coords) ;
+

@@ -1,0 +1,6 @@
+alert(poke_items) ;
+
+for (var a=0;a<poke_items.length;a++) {
+if (poke_items[a] == "Leppa Berry") 
+alert( [a,poke_items[a][0]]  ) ;
+}

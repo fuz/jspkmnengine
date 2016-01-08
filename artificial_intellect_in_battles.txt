@@ -1,0 +1,13 @@
+var i = SIDES[_left] ;
+ActiveBattle.AddAttack(3, i.Pokemon, i.Enemy.Pokemon) ;
+
+var i = SIDES[_left] ;
+DefaultAttacks(i.Pokemon) ;
+ActiveBattle.AddAttack(2, i.Pokemon, i.Enemy.Pokemon) ;
+
+var i = SIDES[_left] ;
+DefaultAttacks(i.Pokemon) ;
+ActiveBattle.AddAttack(1, i.Pokemon, i.Enemy.Pokemon,i) ;
+
+var i = SIDES[_right] ;
+ActiveBattle.AddAttack(0, i.Pokemon, i.Enemy.Pokemon,i) ;

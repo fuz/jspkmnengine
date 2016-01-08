@@ -1,0 +1,25 @@
+function GraphicalBattle() {
+ this.Test = function() {alert("hi")}
+}
+
+function InvisibleBattle() {
+ this.Test = function() {window.status="hi"}
+}
+
+function ToggleGraphics(btype) {
+ if (btype)
+this.BattleType=GraphicalBattle ;
+else this.BattleType=InvisibleBattle ;
+this.BattleType() ; 
+}
+
+function Scene() {
+this.Toggle = ToggleGraphics ;
+this.Toggle() ;
+}
+
+sc = new Scene() ;
+alert(sc.BattleType) ;
+
+sc.Toggle(1) ;
+sc.Test() ;
