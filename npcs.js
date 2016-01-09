@@ -2,6 +2,7 @@
 
 npcs = [
 		{Name:"Timo",
+    CurrentSpeech: 0,
 		Gender:1,
 		Sprite:1,
 		Team:[0],
@@ -12,6 +13,7 @@ npcs = [
 		Pokemons:[aPokemon]
 		},{
 		Name:"Mentor",
+    CurrentSpeech: 0,
 		Gender:1,
 		Sprite:2,
 		Positioning:{

@@ -27,6 +27,8 @@ function StartBattle(Them) {
   // this.AddPokemon(aPokemon) ;
   changeinterface(0) ;
   ENGAGE(this.Number, Them.Number) ;
+  console.log(Them);
+  Them.Data.CurrentSpech = 0;
 }
 
 function NoBehaviour() {

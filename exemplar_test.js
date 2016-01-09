@@ -56,6 +56,7 @@ UpdateStats(aPokemon);
 aCharacter = {
 	// our crash test dummy of sorts
 	Name:"Fuz",
+  CurrentSpeech: 0,
 	Sprite:2,
 	Team:[0],
 	Pokemons:[Pikachu],

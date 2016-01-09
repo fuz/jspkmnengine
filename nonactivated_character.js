@@ -36,15 +36,33 @@ function nTalk(Their) {
 	var mode = "random";
 	var nextSpeech = 0; // default first speech item
 
+
 	if (this.Data.Behaviours.length > 0) {
 		var nextBehaviour = this.Data.Behaviours[0] ;
 		mode = nextBehaviour[0];
-		this.SetBehaviour( Their ) ;
+    var myspeech = speech[this.NPCNumber];
+
+    var lines = myspeech[mode].length
+    if (lines > 0) {
+      this.Queued.push( [function (Me) {
+        console.log("Next conversation line");
+        nextSpeech = ++this.Data.CurrentSpeech;
+
+        if (this.Data.CurrentSpeech == lines - 1) {
+          this.SetBehaviour( Their ) ;
+          this.Data.CurrentSpeech = 0;
+        }
+
+        this.Say( nextSpeech, mode ) ;
+        INTERFACE.SetEncounterImage(_right, TrainerImage(Me.Data.Sprite) ) ;
+      } , [this] ] ) ;
+    }
 
 		nextSpeech = (nextBehaviour.length > 1 ? nextBehaviour[1] : 0)
 	}
 
-	this.Say( nextSpeech, mode ) ;
+
+	this.Say( this.Data.CurrentSpeech, mode ) ;
 	// npc needs to be able to do something else other than battle
 	
 	INTERFACE.SetEncounterImage(_right, TrainerImage(this.Data.Sprite) ) ;

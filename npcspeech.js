@@ -9,7 +9,7 @@ var speech = new Array() ;
 			] */
 
 speech[0] = {
-	prebattle: ["You do not look that tough. Let's battle!"],
+	prebattle: ["You do not look that tough.", "Do you think you can take me?"],
 	random: ["You should wear shorts. They're comfortable."]
 };
 
